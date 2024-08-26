@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar styles */
+.scrollbar-thumb {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
+.scrollbar-thumb::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollbar-thumb::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* Style to visually indicate active status */
+.status-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}

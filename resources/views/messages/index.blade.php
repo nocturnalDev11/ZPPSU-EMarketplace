@@ -1,0 +1,227 @@
+@extends('user.layouts.nav')
+@include('messages.side-nav')
+@section('content')
+<div class="flex min-h-screen items-center justify-center bg-gray-200 to-gray-100 dark:bg-gray-700 text-gray-800">
+    <div id="frame" class="container flex h-[85vh] w-full flex-col overflow-hidden bg-gray-100 sm:flex-row mt-24 rounded-lg">
+        <!-- List of contacts -->
+        <div class="relative w-full flex-shrink-0 bg-white dark:bg-gray-900 dark:text-white sm:w-2/5 lg:w-1/3 border-r-2 dark:border-gray-700">
+            <!-- Search contacts section -->
+            <div class="relative my-4 max-w-lg mx-5">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                    <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
+                        <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <input class="w-full bg-gray-100 dark:bg-gray-800 dark:text-white border-none rounded-md pl-10 pr-4 py-2 focus:ring-0 focus:outline-none" type="text" placeholder="Search contacts">
+            </div>
+
+            <!-- Contacts -->
+            <div id="contacts" class="scrollbar-thumb scrollbar-hide h-[95vh] overflow-y-scroll">
+                <ul>
+                    @foreach($users as $userItem)
+                        <li class="contact flex cursor-pointer items-center py-4 hover:bg-gray-100 dark:hover:bg-gray-800">
+                            <a href="{{ route('messages.index', ['id' => $userItem->id]) }}" wire:navigate class="wrap relative mx-auto flex w-full items-center">
+                                <img src="{{ $userItem->profile_picture ? asset('storage/' . $userItem->profile_picture) : asset('storage/profile_pictures/profile-placeholder.jpg') }}" alt="Contact" class="object-cover ml-6 mr-2 h-10 w-10 rounded-full" />
+                                <div class="meta hidden sm:block">
+                                    <p class="name font-semibold">
+                                        {{ $userItem->first_name }} {{ $userItem->last_name }}
+                                    </p>
+                                    <p class="preview text-gray-400">
+                                        {{ \Illuminate\Support\Str::limit($userItem->latestMessage->content, 50) }} • {{ \Carbon\Carbon::parse($userItem->latestMessage->created_at)->diffForHumans() }}
+                                    </p>
+                                </div>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chat Content -->
+        <div class="content flex h-full w-full flex-col sm:w-3/5 lg:w-2/3">
+            @if(isset($selectedUser))
+                <!-- Contact Profile -->
+                <div class="flex items-center bg-white dark:bg-gray-900 px-5 py-4">
+                    <img src="{{ $selectedUser->profile_picture ? asset('storage/' . $selectedUser->profile_picture) : asset('storage/profile_pictures/profile-placeholder.jpg') }}" alt="Chat Profile" class="h-10 w-10 rounded-full object-cover" />
+                    <div class="flex flex-col">
+                        <p class="ml-4 dark:text-white">{{ $selectedUser->first_name }} {{ $selectedUser->last_name }}</p>
+                        @if (empty($selectedUser->department))
+                            <p class="ml-4 text-sm text-gray-600 dark:text-white">
+                                @if (!empty($selectedUser->role))
+                                    {{ $selectedUser->role }}
+                                @endif
+                            </p>
+                        @else
+                            <p class="ml-4 text-sm text-gray-600 dark:text-white">
+                                {{ $selectedUser->role }} • {{ $selectedUser->department }}
+                            </p>
+                        @endif
+                    </div>
+                </div>
+
+                <!-- Messages -->
+                <div class="messages scrollbar-thumb scrollbar-hide flex-1 overflow-y-scroll pt-3 px-5 bg-gray-50 dark:bg-gray-800">
+                    @foreach($messages as $message)
+                        @if($message->sender_id == Auth::id())
+                            <!-- Sender section -->
+                            <div class="flex justify-end mb-4">
+                                <div class="flex items-start gap-2.5">
+                                    <div class="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-200 rounded-bl-xl rounded-tl-xl rounded-br-xl dark:bg-gray-700">
+                                        <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                                            <span class="text-sm font-semibold text-gray-900 dark:text-white">You</span>
+                                            <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
+                                                {{ \Carbon\Carbon::parse($message->created_at)->diffForHumans() }}
+                                            </span>
+                                        </div>
+                                        <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
+                                            {{ $message->content }}
+                                        </p>
+                                        @if($message->image)
+                                            <div class="group relative my-2.5">
+                                                <div class="absolute w-full h-full bg-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                                                    <button data-tooltip-target="download-image" class="inline-flex items-center justify-center rounded-full h-10 w-10 bg-white/30 hover:bg-white/50 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50">
+                                                        <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3"/>
+                                                        </svg>
+                                                    </button>
+                                                    <div id="download-image" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-800">
+                                                        Download image
+                                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                                    </div>
+                                                </div>
+                                                <img src="{{ asset('storage/'.$message->image) }}" class="rounded-lg object-cover w-full" alt="Message image" />
+                                            </div>
+                                        @elseif($message->content_link)
+                                            <div class="flex items-start gap-2.5">
+                                                <div class="flex flex-col w-full max-w-[320px] leading-1.5">
+                                                    <p class="text-sm font-normal pb-2.5 text-gray-900 dark:text-white">
+                                                        <a href="{{ $message->content_link }}" class="text-blue-700 dark:text-blue-500 underline hover:no-underline font-medium break-all">
+                                                            {{ $message->content_link }}
+                                                        </a>
+                                                    </p>
+                                                    @if($message->content_link_image)
+                                                        <a href="{{ $message->content_link }}" class="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 mb-2 hover:bg-gray-300 dark:hover:bg-gray-500">
+                                                            <img src="{{ asset('storage/'.$message->content_link_image) }}" alt="Content Image" class="rounded-lg mb-2" />
+                                                            @if($message->content_link_description)
+                                                                <span class="text-sm font-medium text-gray-900 dark:text-white mb-2">
+                                                                    {{ $message->content_link_description }}
+                                                                </span>
+                                                            @endif
+                                                        </a>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <!-- Sender profile picture -->
+                                    <img class="w-8 h-8 rounded-full" src="{{ $message->sender->profile_picture ? asset('storage/' . $message->sender->profile_picture) : asset('storage/profile_pictures/profile-placeholder.jpg') }}" alt="{{ $message->sender->first_name }}'s image">
+                                </div>
+                            </div>
+                        @else
+                            <!-- Recipient section -->
+                            <div class="flex justify-start mb-4">
+                                <div class="flex items-start gap-2.5">
+                                    <!-- Recipient profile picture -->
+                                    <img class="w-8 h-8 rounded-full" src="{{ $selectedUser->profile_picture ? asset('storage/' . $selectedUser->profile_picture) : asset('storage/profile_pictures/profile-placeholder.jpg') }}" alt="{{ $selectedUser->first_name }} {{ $selectedUser->last_name }} image">
+                                    <div class="flex flex-col gap-1">
+                                        <div class="flex flex-col w-full max-w-[326px] leading-1.5 p-4 border-gray-200 bg-gray-200 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+                                            <!-- Recipient username and message time -->
+                                            <div class="flex items-center space-x-2 rtl:space-x-reverse mb-2">
+                                                <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ $selectedUser->first_name }} {{ $selectedUser->last_name }}</span>
+                                                <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ \Carbon\Carbon::parse($message->created_at)->diffForHumans() }}</span>
+                                            </div>
+                                            <!-- Message content -->
+                                            <p class="text-sm font-normal text-gray-900 dark:text-white">
+                                                {{ $message->content }}
+                                            </p>
+                                            @if($message->image)
+                                                <div class="group relative my-2.5">
+                                                    <div class="absolute w-full h-full bg-gray-900/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg flex items-center justify-center">
+                                                        <button data-tooltip-target="download-image" class="inline-flex items-center justify-center rounded-full h-10 w-10 bg-white/30 hover:bg-white/50 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50">
+                                                            <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 18">
+                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 1v11m0 0 4-4m-4 4L4 8m11 4v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3"/>
+                                                            </svg>
+                                                        </button>
+                                                        <div id="download-image" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                                            Download image
+                                                            <div class="tooltip-arrow" data-popper-arrow></div>
+                                                        </div>
+                                                    </div>
+                                                    <img src="{{ asset('storage/' . $message->image) }}" class="rounded-lg object-cover w-full" alt="Attached image">
+                                                </div>
+                                            @elseif($message->content_link)
+                                                <div class="flex items-start gap-2.5">
+                                                    <div class="flex flex-col w-full max-w-[320px] leading-1.5">
+                                                        <p class="text-sm font-normal pb-2.5 text-gray-900 dark:text-white">
+                                                            <a href="{{ $message->content_link }}" class="text-blue-700 dark:text-blue-500 underline hover:no-underline font-medium break-all">
+                                                                {{ $message->content_link }}
+                                                            </a>
+                                                        </p>
+                                                        @if($message->content_link_image)
+                                                            <a href="{{ $message->content_link }}" class="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 mb-2 hover:bg-gray-300 dark:hover:bg-gray-500">
+                                                                <img src="{{ asset('storage/'.$message->content_link_image) }}" alt="Content Image" class="rounded-lg mb-2" />
+                                                                @if($message->content_link_description)
+                                                                    <span class="text-sm font-medium text-gray-900 dark:text-white mb-2">
+                                                                        {{ $message->content_link_description }}
+                                                                    </span>
+                                                                @endif
+                                                            </a>
+                                                        @elseif($message->content_link_description)
+                                                            <a href="{{ $message->content_link }}" class="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 mb-2 hover:bg-gray-300 dark:hover:bg-gray-500">
+                                                                <span class="text-sm font-medium text-gray-900 dark:text-white mb-2">
+                                                                    {{ $message->content_link_description }}
+                                                                </span>
+                                                            </a>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+
+                <!-- Message Input -->
+                <div class="relative flex w-full bg-white p-4 dark:bg-gray-900">
+                    <form action="{{ route('messages.reply', $selectedUser->id) }}" method="POST" enctype="multipart/form-data" class="w-full px-2">
+                        @csrf
+                        <label for="replyContent" class="sr-only">Your message</label>
+                        <div class="relative">
+                            <div id="preview" class="mb-4"></div>
+                            <textarea name="replyContent" id="hs-textarea-ex-2" class="p-4 pb-12 block w-full bg-gray-100 dark:bg-gray-800 dark:text-gray-100 border-none rounded-lg text-md focus:border-none focus:ring-0 focus:outline-none resize-none overflow-hidden" placeholder="Write a message..." required oninput="autoResize(this)"></textarea>
+                            <div class="absolute bottom-0 inset-x-0 p-2 rounded-b-md bg-none">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                    <button type="button" class="inline-flex flex-shrink-0 justify-center items-center size-10 rounded-lg text-gray-500">
+                                        <label for="fileInput" class="cursor-pointer">
+                                        <svg class="flex-shrink-0 size-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"></path>
+                                        </svg>
+                                        <input name="image" id="fileInput" type="file" class="hidden">
+                                        </label>
+                                    </button>
+                                    </div>
+                                    <div class="flex items-center gap-x-1">
+                                    <button type="submit" class="inline-flex flex-shrink-0 justify-center items-center size-10 rounded-lg text-white bg-blue-400 hover:bg-blue-600 focus:z-10 focus:outline-none focus:ring-2">
+                                        <svg class="flex-shrink-0 size-6" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M3.478 2.404a.75.75 0 0 0-.926.941l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.404Z"></path>
+                                        </svg>
+                                    </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            @else
+                <p class="my-60 text-3xl font-semibold mb-6 text-black text-center">
+                    Welcome to messages!
+                </p>
+            @endif
+        </div>
+    </div>
+</div>
+@endsection
