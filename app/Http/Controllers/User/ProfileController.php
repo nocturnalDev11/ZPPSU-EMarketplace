@@ -95,7 +95,8 @@ class ProfileController extends Controller
             'suffix' => 'nullable|string|max:255',
             'dob' => 'required|date',
             'gender' => 'required|string|max:255',
-            'contact_number' => 'required|string|max:255',
+            'about' => 'nullable|string|max:255',
+            'contact_number' => 'nullable|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'home_address' => 'nullable|string|max:255',
         ]);
