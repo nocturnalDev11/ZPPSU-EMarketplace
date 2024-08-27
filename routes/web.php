@@ -18,8 +18,10 @@ use App\Http\Controllers\User\Auth\RegisterController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\Users\AdminUserController;
+use App\Http\Controllers\Admin\Users\ListOfUsersController;
 use App\Http\Controllers\User\Auth\ResetPasswordController;
 use App\Http\Controllers\User\Auth\ForgotPasswordController;
+use App\Http\Controllers\Admin\Layouts\NavController as AdminNavController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -162,7 +164,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Admin Dashboard
     Route::middleware('auth:admin')->group(function () {
+        Route::get('/', [AdminNavController::class, 'index'])->name('admin.nav');
         Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+        /*
+        |--------------------------------------------------------------------------
+        | User CRUD routes
+        |--------------------------------------------------------------------------
+        */
         Route::get('users/profile/{id}', [AdminUserController::class, 'show'])->name('users.profile.show');
+        Route::get('/users', [ListOfUsersController::class, 'index'])->name('users.list');
+        Route::get('/users/create', [ListOfUsersController::class, 'create'])->name('users.create');
+        Route::post('/users', [ListOfUsersController::class, 'store'])->name('users.store');
+        Route::get('/users/{user}/edit', [ListOfUsersController::class, 'edit'])->name('users.edit');
+        Route::put('/users/{user}', [ListOfUsersController::class, 'update'])->name('users.update');
+        Route::delete('/users/{user}', [ListOfUsersController::class, 'destroy'])->name('users.destroy');
     });
 });
