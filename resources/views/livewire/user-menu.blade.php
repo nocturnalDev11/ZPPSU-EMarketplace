@@ -8,7 +8,7 @@
     </button>
 
     @if($isOpen)
-        <div class="absolute z-50 my-4 w-72 p-3 text-base list-none bg-gray-100 divide-y divide-gray-300 shadow rounded-xl dark:bg-gray-800 dark:divide-gray-600">
+        <div class="absolute z-50 my-2 w-72 p-3 text-base list-none bg-gray-100 divide-y divide-gray-300 shadow rounded-xl dark:bg-gray-800 dark:divide-gray-600">
             <div class="py-3 px-4 cursor-pointer">
                 <span class="block text-lg font-medium text-gray-700 dark:text-gray-200">
                     {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}

@@ -1,8 +1,9 @@
 @extends('user.layouts.nav')
 
 @section('content')
+@include('user.layouts.side-nav')
 <section class="bg-white mt-24">
-    <div class="max-w-2xl px-4 py-8 mx-auto">
+    <div class="max-w-2xl px-4 mx-auto">
         <!-- Breadcrumb -->
         <nav class="flex mb-5" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">

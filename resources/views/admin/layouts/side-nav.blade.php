@@ -2,13 +2,13 @@
     <div class="h-full px-3 pb-4 overflow-y-auto bg-gray-50 dark:bg-gray-900">
         <ul class="space-y-2 pt-4">
             <li>
-                <a href="{{ route('admin.dashboard') }}" class="flex items-center py-3 px-5 text-gray-900 text-2xl rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <a href="{{ route('admin.dashboard') }}" wire:navigate class="flex items-center py-3 px-5 text-gray-900 text-2xl rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <i class="ri-dashboard-fill flex-shrink-0 w-7 h-7 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
                     <span class="ms-3">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center py-3 px-5 text-gray-900 text-2xl rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <a href="{{ route('admin.users.list') }}" wire:navigate class="flex items-center py-3 px-5 text-gray-900 text-2xl rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <i class="ri-group-2-fill flex-shrink-0 w-7 h-7 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
                     <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
                 </a>
@@ -23,28 +23,28 @@
                 </button>
                 <ul id="dropdown-example" class="hidden py-2 space-y-2">
                     <li>
-                        <a href="#" class="flex items-center w-full text-2xl p-3 text-gray-900 transition duration-75 rounded-lg pl-14 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Products</a>
+                        <a href="#" wire:navigate class="flex items-center w-full text-2xl p-3 text-gray-900 transition duration-75 rounded-lg pl-14 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Products</a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center w-full text-2xl p-3 text-gray-900 transition duration-75 rounded-lg pl-14 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Services</a>
+                        <a href="#" wire:navigate class="flex items-center w-full text-2xl p-3 text-gray-900 transition duration-75 rounded-lg pl-14 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Services</a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center w-full text-2xl p-3 text-gray-900 transition duration-75 rounded-lg pl-14 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Posts</a>
+                        <a href="#" wire:navigate class="flex items-center w-full text-2xl p-3 text-gray-900 transition duration-75 rounded-lg pl-14 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Posts</a>
                     </li>
                     <li>
-                        <a href="#" class="flex items-center w-full text-2xl p-3 text-gray-900 transition duration-75 rounded-lg pl-14 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Tradings</a>
+                        <a href="#" wire:navigate class="flex items-center w-full text-2xl p-3 text-gray-900 transition duration-75 rounded-lg pl-14 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Tradings</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="#" class="flex items-center py-3 px-5 text-gray-900 text-2xl rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <a href="#" wire:navigate class="flex items-center py-3 px-5 text-gray-900 text-2xl rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <i class="ri-inbox-fill flex-shrink-0 w-7 h-7 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
                     <span class="flex-1 ms-3 whitespace-nowrap">Inbox</span>
                     <span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center py-3 px-5 text-gray-900 text-2xl rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <a href="#" wire:navigate class="flex items-center py-3 px-5 text-gray-900 text-2xl rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <i class="ri-notification-3-fill flex-shrink-0 w-7 h-7 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"></i>
                     <span class="flex-1 ms-3 whitespace-nowrap">Notifications</span>
                     <span class="inline-flex items-center justify-center w-fit h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">

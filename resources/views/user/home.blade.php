@@ -301,7 +301,7 @@
                                             @if ($trade->trade_picture)
                                                 <div class="relative">
                                                     <a class="block shadow-lg rounded-2xl">
-                                                        <img src="{{ asset('storage/' . $trade->trade_picture) }}" alt="{{ $post->post_title }}" class="object-cover bg-center h-44 w-full shadow-soft-xl rounded-2xl" />
+                                                        <img src="{{ asset('storage/' . $trade->trade_picture) }}" alt="{{ $trade->trade_title }}" class="object-cover bg-center h-44 w-full shadow-soft-xl rounded-2xl" />
                                                     </a>
                                                 </div>
                                             @else
@@ -403,30 +403,4 @@
             <span class="sr-only">Open actions menu</span>
         </button>
     </div>
-    <script>
-        function searchComponent() {
-            return {
-                search: '',
-                results: [],
-                isOpen: false,
-                performSearch() {
-                    // Always perform search for any input
-                    fetch(`/search?query=${this.search}`)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            this.results = Array.isArray(data) ? data : [];
-                        })
-                        .catch(error => {
-                            console.error('There was a problem with the fetch operation:', error);
-                            this.results = [];
-                        });
-                }
-            };
-        }
-    </script>
 @endsection

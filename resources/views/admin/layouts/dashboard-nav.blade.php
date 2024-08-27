@@ -27,12 +27,13 @@
 
     <!-- Scripts -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+    @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/admin.js'])
 </head>
 <body>
     <div id="app">
         <!-- navbar -->
-        <nav class="fixed z-30 w-screen backdrop-filter backdrop-blur-lg bg-opacity-40 bg-gray-50 dark:bg-gray-900 dark:backdrop:filter dark:backdrop-blur-2xl dark:bg-opacity-40">
+        <nav class="backdrop-filter backdrop-blur-lg bg-opacity-40 bg-white border-b border-white fixed left-0 right-0 top-0 z-50 dark:bg-gray-800 dark:backdrop:filter dark:backdrop-blur-2xl dark:bg-opacity-40 dark:border-gray-700">
             <div class="px-3 py-4 lg:px-5 lg:pl-3">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center justify-center">
@@ -42,7 +43,7 @@
                                 <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
                             </svg>
                         </button>
-                        <a href="{{ route('admin.dashboard') }}" class="flex ml-3.5 lg:ml-3.5 md:mr-24">
+                        <a href="{{ route('admin.dashboard') }}" wire:navigate class="flex ml-3.5 lg:ml-3.5 md:mr-24">
                             <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
                                 Admin Panel
                             </span>
@@ -61,31 +62,34 @@
                         </button>
 
                         <div class="flex items-center ml-3">
-                            <div>
-                                <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button-2" aria-expanded="false" data-dropdown-toggle="dropdown-2">
-                                    <span class="sr-only">Open user menu</span>
-                                    <img class="w-8 h-8 rounded-full" src="{{ asset('storage/profile_pictures/profile-placeholder.jpg') }}" alt="user photo">
-                                </button>
-                            </div>
+                            <button type="button"
+                                    class="relative flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600"
+                                    id="user-menu-button-2"
+                                    aria-expanded="false"
+                                    data-dropdown-toggle="dropdown-2">
+                                <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
 
                             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-2">
                                 <div class="px-4 py-3" role="none">
                                     <p class="text-sm text-gray-900 dark:text-white" role="none">
-                                        Neil Sims
+                                        {{ auth()->user()->first_name }}
                                     </p>
                                     <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                        neil.sims@flowbite.com
+                                        {{ auth()->user()->email }}
                                     </p>
                                 </div>
                                 <ul class="py-1" role="none">
                                     <li>
-                                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</a>
+                                        <a href="{{ route('admin.dashboard') }}" wire:navigate class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</a>
                                     </li>
                                     <li>
                                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
                                     </li>
                                     <li>
-                                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
+                                        <a href="#" wire:navigate onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">
                                             Sign out
                                         </a>
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" class="hidden">
@@ -104,5 +108,6 @@
             @yield('content')
         </main>
     </div>
+    @livewireScripts
 </body>
 </html>

@@ -1,4 +1,4 @@
-<aside class="backdrop-filter backdrop-blur-lg bg-opacity-40 bg-white xl:block lg:block md:hidden hidden fixed top-0 left-0 z-40 w-80 h-screen" aria-label="Sidenav" id="drawer-navigation">
+<aside class="backdrop-filter backdrop-blur-lg bg-opacity-40 bg-white xl:block lg:block md:hidden hidden fixed top-0 left-0 z-40 w-80 h-screen" aria-label="Sidenav">
     <div class="overflow-y-auto py-5 px-3 h-full mb-8 dark:bg-gray-700 pt-14">
         <ul class="flex flex-col w-full text-xl text-gray-700 font-semibold mt-7 gap-2" id="default-styled-tab" data-tabs-toggle="#default-styled-tab-content" role="tablist" data-tabs-active-classes="text-red-700 hover:text-maroon bg-gray-100" data-tabs-inactive-classes="text-gray-500 hover:text-gray-600">
             <!-- personal details tab -->

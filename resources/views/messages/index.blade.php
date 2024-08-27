@@ -1,7 +1,8 @@
 @extends('user.layouts.nav')
 @include('messages.side-nav')
 @section('content')
-<div class="flex min-h-screen items-center justify-center bg-gray-200 to-gray-100 dark:bg-gray-700 text-gray-800">
+@include('user.layouts.side-nav')
+<div class="xl:ml-80 lg:ml-80 md:ml-0 ml-0 flex min-h-screen items-center justify-center bg-gray-200 to-gray-100 dark:bg-gray-700 text-gray-800">
     <div id="frame" class="container flex h-[85vh] w-full flex-col overflow-hidden bg-gray-100 sm:flex-row mt-24 rounded-lg">
         <!-- List of contacts -->
         <div class="relative w-full flex-shrink-0 bg-white dark:bg-gray-900 dark:text-white sm:w-2/5 lg:w-1/3 border-r-2 dark:border-gray-700">

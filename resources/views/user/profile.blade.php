@@ -72,6 +72,9 @@
                     <h3 class="text-gray-600 text-xl font-semibold mb-4 dark:text-gray-300">
                         {{ $user->first_name }}s' information
                     </h3>
+                    <p class="text-gray-600 text-lg my-2 dark:text-gray-300">
+                        {{ $user->about }}
+                    </p>
                     <ul class="mt-2 divide-y-2 text-lg text-gray-700 dark:text-white dark:divide-gray-500">
                         <li class="flex py-2">
                             <span class="font-semibold w-24">Full name:</span>

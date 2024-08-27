@@ -33,9 +33,12 @@
                         Update Profile Picture
                     </button>
                 </form>
-                <div>
+                <div class="flex flex-col">
                     <p id="output-text" class="text-4xl font-semibold text-gray-700 dark:text-white">
-                        {{ $user->first_name }} {{ $user->last_name }}
+                        {{ $user->first_name }} {{ $user->middle_name }} {{ $user->last_name }} {{ $user->suffix }}
+                    </p>
+                    <p class="text-xl font-semibold text-gray-700 dark:text-white">
+                        {{ $user->role }} | {{ $user->department }}
                     </p>
                 </div>
             </div>
@@ -115,6 +118,15 @@
                                 </span>
                             @enderror
                         </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="about" class="block text-sm font-medium text-gray-500">{{ __('About') }}</label>
+                        <textarea id="about" name="about" rows="4" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300 @error('about') is-invalid @enderror" value="{{ $user->about }}"></textarea>
+                        @error('about')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     </div>
                     <!-- Contact number -->
                     <div class="mb-4">
