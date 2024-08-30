@@ -19,11 +19,13 @@ class SearchContacts extends Component
     public function render()
     {
         $users = User::query()
+            ->whereHas('receivedMessages', function ($query) {
+                $query->where('sender_id', Auth::id());
+            })
             ->where(function($query) {
                 $query->where('first_name', 'like', '%' . $this->search . '%')
                     ->orWhere('last_name', 'like', '%' . $this->search . '%');
             })
-            ->whereHas('messages')
             ->with(['sentMessages' => function ($query) {
                 $query->where('recipient_id', Auth::id())->latest();
             }, 'receivedMessages' => function ($query) {
@@ -39,5 +41,4 @@ class SearchContacts extends Component
             'users' => $users,
         ]);
     }
-
 }
