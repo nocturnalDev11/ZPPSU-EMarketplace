@@ -48,7 +48,7 @@
                                     <ul class="relative flex flex-wrap p-1 list-none bg-transparent rounded-xl">
                                         @if(Auth::id() === $user->id)
                                             <li class="z-30 flex-auto text-center">
-                                                <a href="/user/profile/settings" wire:navigate class="bg-gray-200 block w-full px-0 py-1 mb-0 transition-all rounded-lg bg-inherit text-gray-700" href="javascript:;" role="tab" aria-selected="false">
+                                                <a href="{{ route('profile.edit', $user->id) }}" wire:navigate class="bg-gray-200 block w-full px-0 py-1 mb-0 transition-all rounded-lg text-gray-700" role="tab" aria-selected="false">
                                                     <span class="ml-1">Settings</span>
                                                 </a>
                                             </li>
@@ -67,7 +67,7 @@
                     </div>
                 </div>
 
-                <div class="flex-1 bg-white shadow mt-4 p-8 rounded-lg hidden md:hidden lg:hidden xl:block dark:bg-gray-700">
+                <div class="flex-1 bg-white shadow mt-4 p-8 rounded-lg dark:bg-gray-700">
                     <div class="flex justify-center items-center gap-x-16">
                         <div class="font-semibold text-center">
                             <p class="text-black dark:text-white">{{ $productCount }}</p>
@@ -88,7 +88,7 @@
                     </div>
                 </div>
 
-                <div class="flex-1 bg-white shadow mt-4 p-8 rounded-lg hidden md:hidden lg:hidden xl:block dark:bg-gray-700">
+                <div class="flex-1 bg-white shadow mt-4 p-8 rounded-lg dark:bg-gray-700">
                     <h3 class="text-gray-600 text-xl font-semibold mb-4 dark:text-gray-300">
                         {{ $user->first_name }}s' information
                     </h3>
@@ -127,7 +127,7 @@
                     </ul>
                 </div>
 
-                <div class="flex-1 bg-white shadow mt-4 p-8 rounded-lg hidden md:hidden lg:hidden xl:block dark:bg-gray-700">
+                <div class="flex-1 bg-white shadow mt-4 p-8 rounded-lg dark:bg-gray-700">
                     <h3 class="text-gray-600 text-xl font-semibold mb-4 dark:text-gray-300">
                         {{ $user->first_name }}s' Activity log
                     </h3>
