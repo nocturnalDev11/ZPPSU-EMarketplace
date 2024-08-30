@@ -16,20 +16,30 @@
     </div>
 
     <!-- Contacts -->
-    @if(!empty($search))
+    @if(!empty($search) || $users->isNotEmpty())
     <div id="contacts" class="scrollbar-thumb scrollbar-hide h-[95vh] overflow-y-scroll">
         <ul>
             @foreach($users as $userItem)
                 <li class="contact flex cursor-pointer items-center py-4 hover:bg-gray-100 dark:hover:bg-gray-800">
                     <a href="{{ route('messages.index', ['id' => $userItem->id]) }}" wire:navigate class="wrap relative mx-auto flex w-full items-center">
-                        <img src="{{ $userItem->profile_picture ? asset('storage/' . $userItem->profile_picture) : asset('storage/profile_pictures/profile-placeholder.jpg') }}" alt="Contact" class="object-cover ml-6 mr-2 h-10 w-10 rounded-full" />
-                        <div class="meta hidden sm:block">
+
+                        @if($userItem->profile_picture)
+                            <div class="h-10 w-10 relative inline-flex items-center justify-center object-cover ml-6 mr-2 rounded-full">
+                                <img src="{{ asset('storage/' . $userItem->profile_picture) }}" alt="profile_image" class="w-full shadow-soft-sm rounded-xl" />
+                            </div>
+                        @else
+                            <div class="h-10 w-10 relative inline-flex items-center justify-center object-cover ml-6 mr-2 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-600">
+                                <span class="p-2 font-medium text-xl text-gray-600 dark:text-gray-300">
+                                    {{ strtoupper(substr($userItem->first_name, 0, 1)) }}{{ strtoupper(substr($userItem->last_name, 0, 1)) }}
+                                </span>
+                            </div>
+                        @endif
+                        <div class="meta">
                             <p class="name font-semibold">
                                 {{ $userItem->first_name }} {{ $userItem->last_name }}
                             </p>
                             <p class="preview text-gray-400">
-                                {{ $userItem->latestMessage ? \Illuminate\Support\Str::limit($userItem->latestMessage->content, 50) : 'No messages yet' }} •
-                                {{ $userItem->latestMessage ? \Carbon\Carbon::parse($userItem->latestMessage->created_at)->diffForHumans() : '' }}
+                                {{ \Illuminate\Support\Str::limit($userItem->latestMessage->content, 50) }} • {{ \Carbon\Carbon::parse($userItem->latestMessage->created_at)->diffForHumans() }}
                             </p>
                         </div>
                     </a>
