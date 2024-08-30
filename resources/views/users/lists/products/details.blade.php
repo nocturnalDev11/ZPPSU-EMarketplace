@@ -1,8 +1,6 @@
 @extends('users.layouts.nav')
 @section('content')
     @include('users.layouts.side-nav')
-    @include('lists.products.delete-modal')
-    @include('lists.modals.create-modal')
 
     <div class="container h-full xl:ml-80 lg:ml-80 md:ml-0 ml-0 p-4 pt-20">
         <nav class="flex mb-5" aria-label="Breadcrumb">
