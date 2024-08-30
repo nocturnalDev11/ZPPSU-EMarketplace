@@ -53,7 +53,7 @@ class ProductController extends Controller
                             ->where('id', '!=', $product->id)
                             ->get();
 
-        return view('lists.products.details', compact('product', 'products', 'user', 'relatedProducts'));
+        return view('users.lists.products.details', compact('product', 'products', 'user', 'relatedProducts'));
     }
 
     public function destroy($id)
