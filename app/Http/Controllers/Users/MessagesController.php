@@ -14,7 +14,6 @@ class MessagesController extends Controller
     {
         $user = Auth::user();
 
-        // Eager load the latest message for each user the authenticated user has communicated with
         $users = User::where(function ($query) {
             $query->whereExists(function ($subQuery) {
                 $subQuery->selectRaw(1)
