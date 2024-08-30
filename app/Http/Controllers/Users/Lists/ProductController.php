@@ -75,7 +75,7 @@ class ProductController extends Controller
         if (Auth::id() !== $product->user_id) {
             return redirect()->route('users.home')->with('error', 'You are not authorized to edit this product list');
         }
-        return view('lists.products.edit', compact('product'));
+        return view('users.lists.products.edit', compact('product'));
     }
 
     public function update(Request $request, $id)
