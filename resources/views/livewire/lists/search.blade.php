@@ -14,7 +14,7 @@
         autocomplete="off"
     >
     @if(count($results) > 0)
-        <div class="absolute bg-white shadow-lg rounded-md mt-2 w-full z-10 divide-y-2">
+        <div class="absolute bg-white shadow-lg rounded-md mt-2 w-full z-10 divide-y">
             @foreach($results as $result)
                 <div class="flex justify-between items-center px-4 py-3 hover:bg-gray-50 hover:rounded-md">
                     <div class="flex items-center gap-3">
@@ -23,7 +23,7 @@
                         </svg>
                         <a href="{{ $result['url'] }}" wire:navigate class="block text-gray-800">
                             <div class="font-semibold">{{ $result['title'] }}</div>
-                            <div class="text-sm text-gray-600 truncate">{{ $result['description'] }}</div>
+                            <div class="text-sm text-gray-600 truncate max-w-sm xl:max-w-2xl">{{ $result['description'] }}</div>
                         </a>
                     </div>
                     <button
