@@ -4,6 +4,7 @@ namespace App\Livewire\Messages;
 
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class SearchContacts extends Component
 {
@@ -18,12 +19,25 @@ class SearchContacts extends Component
     public function render()
     {
         $users = User::query()
-            ->where('first_name', 'like', '%' . $this->search . '%')
-            ->orWhere('last_name', 'like', '%' . $this->search . '%')
-            ->get();
+            ->where(function($query) {
+                $query->where('first_name', 'like', '%' . $this->search . '%')
+                    ->orWhere('last_name', 'like', '%' . $this->search . '%');
+            })
+            ->whereHas('messages')
+            ->with(['sentMessages' => function ($query) {
+                $query->where('recipient_id', Auth::id())->latest();
+            }, 'receivedMessages' => function ($query) {
+                $query->where('sender_id', Auth::id())->latest();
+            }])
+            ->get()
+            ->map(function ($userItem) {
+                $userItem->latestMessage = $userItem->sentMessages->merge($userItem->receivedMessages)->sortByDesc('created_at')->first();
+                return $userItem;
+            });
 
         return view('livewire.messages.search-contacts', [
             'users' => $users,
         ]);
     }
+
 }
