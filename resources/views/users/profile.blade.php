@@ -1,7 +1,6 @@
-@extends('users.layouts.nav')
+@extends('users.layouts.menu')
 
 @section('content')
-    @include('users.layouts.side-nav')
     <div class="xl:ml-80 lg:ml-80 md:ml-0 ml-0 bg-gray-100 dark:bg-gray-800 font-sans pb-10">
         @php
             $baseClasses = 'grid grid-cols-1 lg:grid-cols-2 gap-6 w-2xl container px-2';
