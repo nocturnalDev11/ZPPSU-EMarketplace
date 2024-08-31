@@ -1,7 +1,6 @@
-@extends('users.layouts.nav')
+@extends('users.layouts.menu')
 
 @section('content')
-    @include('users.layouts.side-nav')
     <div class="xl:ml-80 lg:ml-80 md:ml-0 ml-0 flex min-h-screen items-center justify-center bg-gray-200 to-gray-100 dark:bg-gray-700 text-gray-800">
         <div class="container flex h-[87vh] w-full flex-col overflow-hidden bg-gray-100 sm:flex-row mt-20 rounded-lg">
             <!-- List of contacts -->
@@ -13,7 +12,17 @@
                 @if(isset($selectedUser))
                     <!-- Contact Profile -->
                     <div class="flex items-center bg-white dark:bg-gray-900 px-5 py-4">
-                        <img src="{{ $selectedUser->profile_picture ? asset('storage/' . $selectedUser->profile_picture) : asset('storage/profile_pictures/profile-placeholder.jpg') }}" alt="Chat Profile" class="h-10 w-10 rounded-full object-cover" />
+                        @if($selectedUser->profile_picture)
+                            <div class="relative inline-flex items-center justify-center object-cover ml-6 mr-2">
+                                <img src="{{ asset('storage/' . $selectedUser->profile_picture) }}" alt="profile_image" class="object-cover rounded-full shadow-soft-sm h-10 w-10" />
+                            </div>
+                        @else
+                            <div class="h-10 w-10 relative inline-flex items-center justify-center object-cover ml-6 mr-2 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-600">
+                                <span class="p-2 font-medium text-xl text-gray-600 dark:text-gray-300">
+                                    {{ strtoupper(substr($selectedUser->first_name, 0, 1)) }}{{ strtoupper(substr($selectedUser->last_name, 0, 1)) }}
+                                </span>
+                            </div>
+                        @endif
                         <div class="flex flex-col">
                             <p class="ml-4 dark:text-white">{{ $selectedUser->first_name }} {{ $selectedUser->last_name }}</p>
                             @if (empty($selectedUser->department))
