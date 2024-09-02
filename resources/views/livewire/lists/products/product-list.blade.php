@@ -81,28 +81,33 @@
     <!-- Product List -->
     <div class="flex flex-wrap -mx-3">
         @forelse ($products as $product)
-        <div class="w-full max-w-full px-3 mb-6 md:w-6/12 xl:mb-0 xl:w-3/12">
-            <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none rounded-2xl">
-                <div class="relative">
-                    <a href="{{ route('products.show', $product->id) }}" class="block shadow-lg rounded-2xl">
-                        <img src="{{ asset('storage/' . $product->prod_picture) }}" alt="{{ $product->prod_name }}" class="object-cover bg-center h-44 w-full shadow-soft-xl rounded-2xl">
-                    </a>
-                </div>
-                <div class="flex-auto px-1 pt-6">
-                    <a href="{{ route('products.show', $product->id) }}">
-                        <h5 class="dark:text-white">{{ $product->prod_name }}</h5>
-                    </a>
-                    <p class="relative z-10 mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-gray-800 text-sm bg-clip-text dark:text-white dark:opacity-80">
-                        <span class="text-gray-600 dark:text-gray-400">₱ {{ number_format($product->prod_price, 2) }}</span>
-                    </p>
-                    <a href="{{ route('products.show', $product->id) }}" class="text-sm font-medium text-gray-700 hover:text-maroon">View Details</a>
+            <div class="w-full max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
+                <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none dark:shadow-soft-dark-lg rounded-2xl bg-clip-border h-full">
+                    <div class="relative">
+                        <a href="{{ route('products.show', $product->id) }}" wire:navigate class="block shadow-lg rounded-2xl">
+                            <img src="{{ asset('storage/' . $product->prod_picture) }}" alt="{{ $product->prod_name }}" class="object-cover bg-center h-44 w-full shadow-soft-xl rounded-2xl" />
+                        </a>
+                    </div>
+                    <div class="flex-auto px-1 pt-6">
+                        <a href="{{ route('products.show', $product->id) }}" wire:navigate>
+                            <h5 class="dark:text-white">{{ $product->prod_name }}</h5>
+                        </a>
+                        <p class="relative z-10 mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-gray-800 text-sm bg-clip-text dark:text-white dark:opacity-80">
+                            ₱{{ $product->prod_price }}
+                        </p>
+                        <p class="mb-6 leading-normal text-sm dark:text-white dark:opacity-60 text-truncate">{{ $product->prod_description }}</p>
+                    </div>
+                    <div class="flex items-center justify-between mt-auto">
+                        <a href="{{ route('products.show', $product->id) }}" wire:navigate class="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500">
+                            View product
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
         @empty
-        <div class="flex items-center justify-center w-full">
-            <p class="text-lg text-gray-700">No products found.</p>
-        </div>
+            <div class="flex items-center justify-center w-full">
+                <p class="text-lg text-gray-700">No products found.</p>
+            </div>
         @endforelse
     </div>
 </div>
