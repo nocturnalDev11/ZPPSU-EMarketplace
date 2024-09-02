@@ -28,10 +28,3 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
-
-/* Style to visually indicate active status */
-.status-circle {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-}
