@@ -31,7 +31,7 @@
                                 </a>
                             </div>
                         </div>
-    
+
                         <!-- Card 2 -->
                         <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-52">
                             <div class="flex-auto p-4 flex flex-col justify-between h-full">
@@ -57,7 +57,7 @@
                                 </a>
                             </div>
                         </div>
-    
+
                         <!-- Card 3 -->
                         <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-52">
                             <div class="flex-auto p-4 flex flex-col justify-between h-full">
@@ -83,7 +83,7 @@
                                 </a>
                             </div>
                         </div>
-    
+
                         <!-- Card 4 -->
                         <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-52">
                             <div class="flex-auto p-4 flex flex-col justify-between h-full">
@@ -112,7 +112,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <div class="flex-none w-full max-w-full mt-6">
                 <!-- Product -->
                 <div class="relative px-6 py-3 flex flex-col min-w-0 mb-6 break-words bg-gradient-to-br from-red-50 via-purple-50 to-gray-100 border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-lg bg-clip-border">
@@ -131,7 +131,7 @@
                                 <!-- Product Item -->
                                 @foreach ($products as $product)
                                     <div class="w-full max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
-                                        <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none dark:shadow-soft-dark-lg rounded-2xl bg-clip-border">
+                                        <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none dark:shadow-soft-dark-lg rounded-2xl bg-clip-border h-full">
                                             <div class="relative">
                                                 <a href="{{ route('products.show', $product->id) }}" wire:navigate class="block shadow-lg rounded-2xl">
                                                     <img src="{{ asset('storage/' . $product->prod_picture) }}" alt="{{ $product->prod_name }}" class="object-cover bg-center h-44 w-full shadow-soft-xl rounded-2xl" />
@@ -141,15 +141,15 @@
                                                 <a href="{{ route('products.show', $product->id) }}" wire:navigate>
                                                     <h5 class="dark:text-white">{{ $product->prod_name }}</h5>
                                                 </a>
-                                                <p class="relative z-10 mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-gray-800 text-sm bg-clip-text dark:text-white dark:opacity-80">
+                                                <p class="relative mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-gray-800 text-sm bg-clip-text dark:text-white dark:opacity-80">
                                                     ₱{{ $product->prod_price }}
                                                 </p>
                                                 <p class="mb-6 leading-normal text-sm dark:text-white dark:opacity-60 text-truncate">{{ $product->prod_description }}</p>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="{{ route('products.show', $product->id) }}" wire:navigate class="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500">
-                                                        View product
-                                                    </a>
-                                                </div>
+                                            </div>
+                                            <div class="flex items-center justify-between mt-auto">
+                                                <a href="{{ route('products.show', $product->id) }}" wire:navigate class="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500">
+                                                    View product
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -158,7 +158,7 @@
                         </div>
                     @endif
                 </div>
-    
+
                 <!-- Service -->
                 <div class="relative px-6 py-3 flex flex-col min-w-0 mb-6 break-words bg-gradient-to-br from-red-50 via-purple-50 to-gray-100 border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-lg bg-clip-border">
                     <div class="p-4 pb-0 mb-0 rounded-t-2xl">
@@ -176,7 +176,7 @@
                                 <!-- Product Item -->
                                 @foreach ($services as $service)
                                     <div class="w-full max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
-                                        <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none dark:shadow-soft-dark-lg rounded-2xl bg-clip-border">
+                                        <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none dark:shadow-soft-dark-lg rounded-2xl bg-clip-border h-full">
                                             @if ($service->services_picture)
                                                 <div class="relative">
                                                     <a class="block shadow-lg rounded-2xl">
@@ -201,15 +201,15 @@
                                                 <a href="{{ route('services.show', $service->id) }}" wire:navigate>
                                                     <h5 class="dark:text-white">{{ $service->services_title }}</h5>
                                                 </a>
-                                                <p class="relative z-10 mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-gray-800 text-sm bg-clip-text dark:text-white dark:opacity-80">
+                                                <p class="relative mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-gray-800 text-sm bg-clip-text dark:text-white dark:opacity-80">
                                                     ₱{{ $service->services_fee }}
                                                 </p>
                                                 <p class="mb-6 leading-normal text-sm dark:text-white dark:opacity-60 text-truncate">{!! nl2br(e($service->services_description)) !!}</p>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="{{ route('services.show', $service->id) }}" wire:navigate class="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500">
-                                                        View service
-                                                    </a>
-                                                </div>
+                                            </div>
+                                            <div class="flex items-center justify-between mt-auto">
+                                                <a href="{{ route('services.show', $service->id) }}" wire:navigate class="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500">
+                                                    View service
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -218,7 +218,7 @@
                         </div>
                     @endif
                 </div>
-    
+
                 <!-- Posts -->
                 <div class="relative px-6 py-3 flex flex-col min-w-0 mb-6 break-words bg-gradient-to-br from-red-50 via-purple-50 to-gray-100 border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-lg bg-clip-border">
                     <div class="p-4 pb-0 mb-0 rounded-t-2xl">
@@ -236,7 +236,7 @@
                                 <!-- Post Item -->
                                 @foreach ($posts as $post)
                                     <div class="w-full max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
-                                        <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none dark:shadow-soft-dark-lg rounded-2xl bg-clip-border">
+                                        <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none dark:shadow-soft-dark-lg rounded-2xl bg-clip-border h-full">
                                             @if ($post->post_picture)
                                                 <div class="relative">
                                                     <a class="block shadow-lg rounded-2xl">
@@ -261,15 +261,15 @@
                                                 <a href="{{ route('posts.show', $post->id) }}" wire:navigate>
                                                     <h5 class="dark:text-white">{{ $post->post_title }}</h5>
                                                 </a>
-                                                <p class="relative z-10 mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-gray-800 text-sm bg-clip-text dark:text-white dark:opacity-80">
+                                                <p class="relative mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-gray-800 text-sm bg-clip-text dark:text-white dark:opacity-80">
                                                     {{ $post->post_list_type }}
                                                 </p>
                                                 <p class="mb-6 leading-normal text-sm dark:text-white dark:opacity-60 text-truncate">{!! nl2br(e($post->post_content)) !!}</p>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="{{ route('posts.show', $post->id) }}" wire:navigate class="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500">
-                                                        View post
-                                                    </a>
-                                                </div>
+                                            </div>
+                                            <div class="flex items-center justify-between mt-auto">
+                                                <a href="{{ route('posts.show', $post->id) }}" wire:navigate class="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500">
+                                                    View post
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -278,7 +278,7 @@
                         </div>
                     @endif
                 </div>
-    
+
                 <!-- Tradings -->
                 <div class="relative px-6 py-3 flex flex-col min-w-0 mb-6 break-words bg-gradient-to-br from-red-50 via-purple-50 to-gray-100 border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-lg bg-clip-border">
                     <div class="p-4 pb-0 mb-0 rounded-t-2xl">
@@ -296,7 +296,7 @@
                                 <!-- Post Item -->
                                 @foreach ($trades as $trade)
                                     <div class="w-full max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
-                                        <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none dark:shadow-soft-dark-lg rounded-2xl bg-clip-border">
+                                        <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none dark:shadow-soft-dark-lg rounded-2xl bg-clip-border h-full">
                                             @if ($trade->trade_picture)
                                                 <div class="relative">
                                                     <a class="block shadow-lg rounded-2xl">
@@ -321,15 +321,15 @@
                                                 <a href="{{ route('trades.show', $trade->id) }}" wire:navigate>
                                                     <h5 class="dark:text-white">{{ $trade->trade_title }}</h5>
                                                 </a>
-                                                <p class="relative z-10 mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-gray-800 text-sm bg-clip-text dark:text-white dark:opacity-80">
+                                                <p class="relative mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-gray-800 text-sm bg-clip-text dark:text-white dark:opacity-80">
                                                     {{ $trade->trade_status }}
                                                 </p>
                                                 <p class="mb-6 leading-normal text-sm dark:text-white dark:opacity-60 text-truncate">{!! nl2br(e($trade->trade_description)) !!}</p>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="{{ route('trades.show', $trade->id) }}" wire:navigate class="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500">
-                                                        View trading
-                                                    </a>
-                                                </div>
+                                            </div>
+                                            <div class="flex items-center justify-between mt-auto">
+                                                <a href="{{ route('trades.show', $trade->id) }}" wire:navigate class="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500">
+                                                    View trading
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -339,7 +339,7 @@
                     @endif
                 </div>
             </div>
-    
+
             <div x-data="{ open: false }" class="fixed end-6 bottom-6 group">
                 <div x-show="open" @click.outside="open = false" class="flex flex-col items-center mb-4 space-y-2">
                     @include('users.lists.products.create-product')
