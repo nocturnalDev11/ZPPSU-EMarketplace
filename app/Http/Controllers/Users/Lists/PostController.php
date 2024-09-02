@@ -75,7 +75,7 @@ class PostController extends Controller
         if (Auth::id() !== $post->user_id) {
             return redirect()->route('home')->with('error', 'You are not authorized to edit this post');
         }
-        return view('lists.posts.edit', compact('post'));
+        return view('users.lists.posts.edit', compact('post'));
     }
 
     public function update(Request $request, $id)
