@@ -53,7 +53,7 @@ class PostController extends Controller
                             ->where('id', '!=', $post->id)
                             ->get();
 
-        return view('lists.posts.details', compact('post', 'posts', 'user', 'relatedPosts'));
+        return view('users.lists.posts.details', compact('post', 'posts', 'user', 'relatedPosts'));
     }
 
     public function destroy($id)
