@@ -1,6 +1,7 @@
 <div x-data="{
     openSort: false,
     openFilter: false,
+    openStatus: false,
     selectedCategories: @entangle('selectedCategories'),
     sortBy: @entangle('sortBy'),
     search: @entangle('search')
