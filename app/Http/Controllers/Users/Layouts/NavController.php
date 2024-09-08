@@ -15,10 +15,10 @@ class NavController extends Controller
             $user = Auth::user();
             $users = User::all();
 
-            return view('users.layouts.nav', compact('user', 'users'));
+            return view('users.layouts.menu', compact('user', 'users'));
         }
 
-        return view('users.layouts.nav');
+        return view('users.layouts.menu');
     }
 
     public function logout(Request $request)
