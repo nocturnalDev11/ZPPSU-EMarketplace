@@ -1,7 +1,7 @@
 @extends('users.layouts.menu')
 
 @section('content')
-    <div class="xl:ml-80 lg:ml-80 md:ml-0 ml-0 bg-gray-100 dark:bg-gray-800 font-sans pb-10">
+    <div class="xl:ml-80 lg:ml-80 md:ml-0 ml-0 bg-gray-100 dark:bg-gray-900 font-sans pb-10">
         @php
             $baseClasses = 'grid grid-cols-1 lg:grid-cols-2 gap-6 w-2xl container px-2';
             $additionalClasses = 'mx-auto';
@@ -11,9 +11,9 @@
             <aside class="mt-24">
                 <div class="flex-1 px-6">
                     <div class="relative flex items-center overflow-hidden rounded-2xl bg-cover bg-center" style="height: 245px;">
-                        <span class="absolute inset-y-0 w-full h-full bg-gradient-to-tl from-sky-200/50 via-purple-200/50 to-pink-200/50 opacity-60"></span>
+                        <span class="absolute inset-y-0 w-full h-full bg-gradient-to-tl from-sky-200/50 via-purple-200/50 to-pink-200/50 opacity-60 dark:from-sky-200/20 dark:via-purple-200/20 dark:to-pink-200/20"></span>
                     </div>
-                    <div class="relative flex flex-col flex-auto min-w-0 p-4 mx-6 -mt-12 overflow-hidden break-words border-0 shadow-md rounded-2xl bg-white/80 backdrop-blur-2xl backdrop-saturate-200">
+                    <div class="relative flex flex-col flex-auto min-w-0 p-4 mx-6 -mt-12 overflow-hidden break-words border-0 shadow-md rounded-2xl bg-white/80 backdrop-blur-2xl backdrop-saturate-200 dark:bg-gray-800/80">
                         <div class="flex flex-wrap -mx-3">
                             <div class="flex-none w-auto max-w-full px-3">
                                 @if($user->profile_picture)
@@ -22,7 +22,7 @@
                                     </div>
                                 @else
                                     <div class="relative inline-flex items-center justify-center rounded-xl overflow-hidden bg-gray-200 dark:bg-gray-600 h-24 w-24">
-                                        <span class="p-2 font-medium text-4xl text-gray-600 dark:text-gray-300">
+                                        <span class="p-2 font-medium text-4xl text-gray-700 dark:text-gray-300">
                                             {{ strtoupper(substr($user->first_name, 0, 1)) }}{{ strtoupper(substr($user->last_name, 0, 1)) }}
                                         </span>
                                     </div>
@@ -30,8 +30,8 @@
                             </div>
                             <div class="flex-none w-auto max-w-full px-3 my-auto">
                                 <div class="h-full">
-                                    <h5 class="mb-1e">{{ $user->first_name }} {{ $user->last_name }}</h5>
-                                    <p class="mb-0 font-semibold leading-normal text-sm dark:opacity-60">
+                                    <h5 class="mb-1e dark:text-gray-50">{{ $user->first_name }} {{ $user->last_name }}</h5>
+                                    <p class="mb-0 font-semibold leading-normal text-sm dark:opacity-60 dark:text-gray-300">
                                         @if (($user->department) == 'N/A')
                                             @if (!empty($user->role))
                                                 {{ $user->role }}
@@ -47,14 +47,14 @@
                                     <ul class="relative flex flex-wrap p-1 list-none bg-transparent rounded-xl">
                                         @if(Auth::id() === $user->id)
                                             <li class="z-30 flex-auto text-center">
-                                                <a href="{{ route('profile.edit', $user->id) }}" wire:navigate class="bg-gray-200 block w-full px-0 py-1 mb-0 transition-all rounded-lg text-gray-700" role="tab" aria-selected="false">
+                                                <a href="{{ route('profile.edit', $user->id) }}" wire:navigate class="bg-gray-200 block w-full px-0 py-1 mb-0 transition-all rounded-lg text-gray-700 dark:bg-gray-700/70 dark:text-gray-100">
                                                     <span class="ml-1">Settings</span>
                                                 </a>
                                             </li>
                                         @endif
                                         @if(Auth::check() && Auth::id() !== $user->id)
                                             <li class="z-30 flex-auto text-center">
-                                                <button class="bg-gray-200 block w-full px-0 py-1 mb-0 transition-all rounded-lg bg-inherit text-gray-700" href="javascript:;">
+                                                <button class="bg-gray-200 block w-full px-0 py-1 mb-0 transition-all rounded-lg bg-inherit text-gray-700 dark:bg-gray-700/70 dark:text-gray-100" href="javascript:;">
                                                     <span class="ml-1">Messages</span>
                                                 </button>
                                             </li>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
 
-                <div class="flex-1 bg-white shadow mt-4 p-8 rounded-lg dark:bg-gray-700">
+                <div class="flex-1 bg-white shadow mt-4 p-8 rounded-lg dark:bg-gray-800/80">
                     <div class="flex justify-center items-center gap-x-16">
                         <div class="font-semibold text-center">
                             <p class="text-black dark:text-white">{{ $productCount }}</p>
@@ -87,14 +87,14 @@
                     </div>
                 </div>
 
-                <div class="flex-1 bg-white shadow mt-4 p-8 rounded-lg dark:bg-gray-700">
+                <div class="flex-1 bg-white shadow mt-4 p-8 rounded-lg dark:bg-gray-800/80">
                     <h3 class="text-gray-600 text-xl font-semibold mb-4 dark:text-gray-300">
                         {{ $user->first_name }}s' information
                     </h3>
                     <p class="text-gray-600 text-lg my-2 dark:text-gray-300">
                         {{ $user->about }}
                     </p>
-                    <ul class="mt-2 divide-y text-lg text-gray-700 dark:text-white dark:divide-gray-500">
+                    <ul class="mt-2 divide-y text-lg text-gray-700 dark:text-white dark:divide-gray-700">
                         <li class="flex py-2">
                             <span class="font-semibold w-24">Full name:</span>
                             <span class="text-gray-700 dark:text-gray-300">{{ $user->first_name }} {{ $user->middle_name }} {{ $user->last_name }}</span>
@@ -126,7 +126,7 @@
                     </ul>
                 </div>
 
-                <div class="flex-1 bg-white shadow mt-4 p-8 rounded-lg dark:bg-gray-700">
+                <div class="flex-1 bg-white shadow mt-4 p-8 rounded-lg dark:bg-gray-800/80">
                     <h3 class="text-gray-600 text-xl font-semibold mb-4 dark:text-gray-300">
                         {{ $user->first_name }}s' Activity log
                     </h3>
@@ -136,7 +136,7 @@
                                 <p class="text-gray-400">No activities found.</p>
                             </div>
                         @else
-                            <div class="absolute h-full border-dashed border-2 border-opacity-20 border-gray-400 dark:border-gray-200"></div>
+                            <div class="absolute h-full border-dashed border border-opacity-20 border-gray-400 dark:border-gray-600"></div>
                             @foreach($activities as $activity)
                                 <!-- start::Timeline item -->
                                 <div class="flex items-center w-full my-6 -ml-1.5">
@@ -171,7 +171,7 @@
                     <!-- Products section -->
                     <div>
                         @foreach($user->products as $product)
-                            <div class="bg-white shadow rounded-lg mb-6 pb-3 dark:bg-gray-700" >
+                            <div class="bg-white shadow rounded-lg mb-6 pb-3 dark:bg-gray-800/80" >
                                 <!-- Header -->
                                 <div class="flex flex-row items-center px-2 py-3 mx-3 border-b dark:border-gray-500">
                                     <div class="w-auto h-auto rounded-full">
@@ -231,7 +231,7 @@
                     <!-- Service section -->
                     <div>
                         @foreach($user->services as $service)
-                            <div class="bg-white shadow rounded-lg mb-6 pb-3 dark:bg-gray-700" >
+                            <div class="bg-white shadow rounded-lg mb-6 pb-3 dark:bg-gray-800/80" >
                                 <!-- Header -->
                                 <div class="flex flex-row items-center px-2 py-3 mx-3 border-b dark:border-gray-500">
                                     <div class="w-auto h-auto rounded-full">
@@ -289,7 +289,7 @@
                     <!-- Post section -->
                     <div id="post" role="tabpanel" aria-labelledby="posts-tab">
                         @foreach($user->posts as $post)
-                            <div class="bg-white shadow rounded-lg mb-6 pb-3 dark:bg-gray-700" >
+                            <div class="bg-white shadow rounded-lg mb-6 pb-3 dark:bg-gray-800/80" >
                                 <!-- Header -->
                                 <div class="flex flex-row items-center px-2 py-3 mx-3 border-b dark:border-gray-500">
                                     <div class="w-auto h-auto rounded-full">
@@ -343,7 +343,7 @@
                     <!-- Trading section -->
                     <div id="trade" role="tabpanel" aria-labelledby="trades-tab">
                         @foreach($user->trades as $trade)
-                            <div class="bg-white shadow rounded-lg mb-6 pb-3 dark:bg-gray-700" >
+                            <div class="bg-white shadow rounded-lg mb-6 pb-3 dark:bg-gray-800/80" >
                                 <!-- Header -->
                                 <div class="flex flex-row items-center px-2 py-3 mx-3 border-b dark:border-gray-500">
                                     <div class="w-auto h-auto rounded-full">

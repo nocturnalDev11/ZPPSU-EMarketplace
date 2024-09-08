@@ -92,6 +92,7 @@
                                 <option value="" selected>Select category</option>
                                 <option value="Apparel">Apparel</option>
                                 <option value="School supplies">School Supplies</option>
+                                <option value="Footwares">Footwares</option>
                                 <option value="Stationery">Stationery</option>
                                 <option value="Electronics">Electronics</option>
                                 <option value="University merchandise">University Merchandise</option>

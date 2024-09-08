@@ -103,7 +103,7 @@
 
                         <div class="flex justify-b mt-6">
                             <button type="submit" class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:ring-none">
-                                Create post
+                                Add post
                             </button>
                         </div>
                     </div>

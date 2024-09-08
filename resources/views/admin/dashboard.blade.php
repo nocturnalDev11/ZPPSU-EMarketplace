@@ -1,6 +1,5 @@
 @extends('admin.layouts.dashboard-nav')
 
-@include('admin.layouts.side-nav')
 @section('content')
 <div id="main-content" class="flex overflow-hidden bg-gray-50 dark:bg-gray-900 transition-all ml-80 h-full">
     <div class="relative w-full overflow-y-auto pt-24">

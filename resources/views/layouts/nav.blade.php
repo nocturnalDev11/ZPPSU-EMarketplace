@@ -26,14 +26,13 @@
     </script>
 
     <!-- Scripts -->
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.4.2/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
     <div id="app">
-        <nav class="backdrop-filter backdrop-blur-lg bg-opacity-40 bg-white border-b border-gray-200 fixed left-0 right-0 top-0 z-50 dark:bg-gray-800 dark:backdrop:filter dark:backdrop-blur-lg dark:bg-opacity-40 dark:border-gray-700">
+        <nav class="backdrop-filter backdrop-blur-lg bg-opacity-40 bg-white fixed left-0 right-0 top-0 z-50 dark:bg-gray-900 dark:backdrop:filter dark:backdrop-blur-lg dark:bg-opacity-40">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-2">
                 <a href="{{ url('/') }}" wire:navigate class="flex items-center p-3 rounded-md space-x-3 rtl:space-x-reverse hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                     <svg class="size-8 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">

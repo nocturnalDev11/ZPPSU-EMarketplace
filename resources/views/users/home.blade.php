@@ -1,19 +1,19 @@
 @extends('users.layouts.menu')
 
 @section('content')
-    <div class="bg-white pt-14">
+    <div class="bg-white dark:bg-gray-900">
         <div class="container h-full xl:ml-80 lg:ml-80 md:ml-0 ml-0 p-4 pt-20 mx-auto">
-            <div class="relative bg-gradient-to-br from-red-50 via-purple-50 to-gray-100 md:py-10 py-10 rounded-lg">
+            <div class="relative bg-gradient-to-br from-sky-100/50 via-purple-100/50 to-pink-100/50 md:py-10 py-10 rounded-lg dark:from-sky-200/10 dark:via-purple-200/10 dark:to-pink-200/10">
                 <div class="px-4 md:px-10 mx-auto w-full">
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                         <!-- Card 1 -->
-                        <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-52">
+                        <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-52 dark:bg-gray-700 dark:backdrop:filter dark:backdrop-blur-2xl dark:bg-opacity-20">
                             <div class="flex-auto p-4 flex flex-col justify-between h-full">
                                 <div>
                                     <div class="flex flex-wrap">
                                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                                            <h5 class="text-gray-700 uppercase font-bold text-md">PRODUCTS</h5>
-                                            <span class="font-semibold text-sm text-gray-500">
+                                            <h5 class="text-gray-700 uppercase font-bold text-md dark:text-gray-50">PRODUCTS</h5>
+                                            <span class="font-semibold text-sm text-gray-500 dark:text-gray-300">
                                                 Browse through a variety of products available for sale within the university community.
                                             </span>
                                         </div>
@@ -33,13 +33,13 @@
                         </div>
 
                         <!-- Card 2 -->
-                        <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-52">
+                        <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-52 dark:bg-gray-700 dark:backdrop:filter dark:backdrop-blur-2xl dark:bg-opacity-20">
                             <div class="flex-auto p-4 flex flex-col justify-between h-full">
                                 <div>
                                     <div class="flex flex-wrap">
                                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                                            <h5 class="text-gray-700 uppercase font-bold text-md">SERVICES</h5>
-                                            <span class="font-semibold text-sm text-gray-500">
+                                            <h5 class="text-gray-700 uppercase font-bold text-md dark:text-gray-50">SERVICES</h5>
+                                            <span class="font-semibold text-sm text-gray-500 dark:text-gray-300">
                                                 Discover a wide range of services offered by your peers and faculty.
                                             </span>
                                         </div>
@@ -59,13 +59,13 @@
                         </div>
 
                         <!-- Card 3 -->
-                        <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-52">
+                        <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-52 dark:bg-gray-700 dark:backdrop:filter dark:backdrop-blur-2xl dark:bg-opacity-20">
                             <div class="flex-auto p-4 flex flex-col justify-between h-full">
                                 <div>
                                     <div class="flex flex-wrap">
                                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                                            <h5 class="text-gray-700 uppercase font-bold text-md">POSTS</h5>
-                                            <span class="font-semibold text-sm text-gray-500">
+                                            <h5 class="text-gray-700 uppercase font-bold text-md dark:text-gray-50">POSTS</h5>
+                                            <span class="font-semibold text-sm text-gray-500 dark:text-gray-300">
                                                 Explore the latest listings and announcements from fellow students, staff, and faculty.
                                             </span>
                                         </div>
@@ -85,13 +85,13 @@
                         </div>
 
                         <!-- Card 4 -->
-                        <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-52">
+                        <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg h-52 dark:bg-gray-700 dark:backdrop:filter dark:backdrop-blur-2xl dark:bg-opacity-20">
                             <div class="flex-auto p-4 flex flex-col justify-between h-full">
                                 <div>
                                     <div class="flex flex-wrap">
                                         <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                                            <h5 class="text-gray-700 uppercase font-bold text-md">TRADES</h5>
-                                            <span class="font-semibold text-sm text-gray-500">
+                                            <h5 class="text-gray-700 uppercase font-bold text-md dark:text-gray-50">TRADES</h5>
+                                            <span class="font-semibold text-sm text-gray-500 dark:text-gray-300">
                                                 Manage your transactions and profile settings conveniently.
                                             </span>
                                         </div>
@@ -104,7 +104,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <a href="{{ route('lists.trades.index') }}" type="button" class="text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+                                <a href="{{ route('lists.trades.index') }}" type="button" class="text-white bg-gradient-to-br from-green-400 to-blue-600 dark:from-green-300 dark:to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
                                     All trades
                                 </a>
                             </div>
@@ -115,7 +115,7 @@
 
             <div class="flex-none w-full max-w-full mt-6">
                 <!-- Product -->
-                <div class="relative px-6 py-3 flex flex-col min-w-0 mb-6 break-words bg-gradient-to-br from-red-50 via-purple-50 to-gray-100 border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-lg bg-clip-border">
+                <div class="relative px-6 py-3 flex flex-col min-w-0 mb-6 break-words bg-gradient-to-br from-sky-100/50 via-purple-100/50 to-pink-100/50 border-0 dark:from-sky-200/10 dark:via-purple-200/10 dark:to-pink-200/10 dark:shadow-soft-dark-xl shadow-soft-xl rounded-lg bg-clip-border">
                     <div class="p-4 pb-0 mb-0 rounded-t-2xl">
                         <h2 class="mb-1 text-xl dark:text-white">Products</h2>
                     </div>
@@ -160,7 +160,7 @@
                 </div>
 
                 <!-- Service -->
-                <div class="relative px-6 py-3 flex flex-col min-w-0 mb-6 break-words bg-gradient-to-br from-red-50 via-purple-50 to-gray-100 border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-lg bg-clip-border">
+                <div class="relative px-6 py-3 flex flex-col min-w-0 mb-6 break-words bg-gradient-to-br from-sky-100/50 via-purple-100/50 to-pink-100/50 border-0 dark:from-sky-200/10 dark:via-purple-200/10 dark:to-pink-200/10 dark:shadow-soft-dark-xl shadow-soft-xl rounded-lg bg-clip-border">
                     <div class="p-4 pb-0 mb-0 rounded-t-2xl">
                         <h2 class="mb-1 text-xl dark:text-white">Services</h2>
                     </div>
@@ -173,7 +173,7 @@
                     @else
                         <div class="flex-auto p-4">
                             <div class="flex flex-wrap -mx-3">
-                                <!-- Product Item -->
+                                <!-- Service Item -->
                                 @foreach ($services as $service)
                                     <div class="w-full max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
                                         <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none dark:shadow-soft-dark-lg rounded-2xl bg-clip-border h-full">
@@ -220,7 +220,7 @@
                 </div>
 
                 <!-- Posts -->
-                <div class="relative px-6 py-3 flex flex-col min-w-0 mb-6 break-words bg-gradient-to-br from-red-50 via-purple-50 to-gray-100 border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-lg bg-clip-border">
+                <div class="relative px-6 py-3 flex flex-col min-w-0 mb-6 break-words bg-gradient-to-br from-sky-100/50 via-purple-100/50 to-pink-100/50 border-0 dark:from-sky-200/10 dark:via-purple-200/10 dark:to-pink-200/10 dark:shadow-soft-dark-xl shadow-soft-xl rounded-lg bg-clip-border">
                     <div class="p-4 pb-0 mb-0 rounded-t-2xl">
                         <h2 class="mb-1 text-xl dark:text-white">Posts</h2>
                     </div>
@@ -280,7 +280,7 @@
                 </div>
 
                 <!-- Tradings -->
-                <div class="relative px-6 py-3 flex flex-col min-w-0 mb-6 break-words bg-gradient-to-br from-red-50 via-purple-50 to-gray-100 border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-lg bg-clip-border">
+                <div class="relative px-6 py-3 flex flex-col min-w-0 mb-6 break-words bg-gradient-to-br from-sky-100/50 via-purple-100/50 to-pink-100/50 border-0 dark:from-sky-200/10 dark:via-purple-200/10 dark:to-pink-200/10 dark:shadow-soft-dark-xl shadow-soft-xl rounded-lg bg-clip-border">
                     <div class="p-4 pb-0 mb-0 rounded-t-2xl">
                         <h2 class="mb-1 text-xl dark:text-white">Tradings</h2>
                     </div>
@@ -327,7 +327,7 @@
                                                 <p class="mb-6 leading-normal text-sm dark:text-white dark:opacity-60 text-truncate">{!! nl2br(e($trade->trade_description)) !!}</p>
                                             </div>
                                             <div class="flex items-center justify-between mt-auto">
-                                                <a href="{{ route('trades.show', $trade->id) }}" wire:navigate class="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all text-white bg-gradient-to-br from-green-400 to-blue-600 hover:bg-gradient-to-bl rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500">
+                                                <a href="{{ route('trades.show', $trade->id) }}" wire:navigate class="inline-block px-8 py-2 mb-0 font-bold text-center uppercase align-middle transition-all text-white bg-gradient-to-br from-green-400 to-blue-600 dark:from-green-300 dark:to-blue-500 hover:bg-gradient-to-bl rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs hover:scale-102 active:shadow-soft-xs tracking-tight-soft border-fuchsia-500 text-fuchsia-500 hover:border-fuchsia-500 hover:bg-transparent hover:text-fuchsia-500 hover:opacity-75 hover:shadow-none active:bg-fuchsia-500 active:text-white active:hover:bg-transparent active:hover:text-fuchsia-500">
                                                     View trading
                                                 </a>
                                             </div>

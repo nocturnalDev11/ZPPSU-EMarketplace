@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="xl:ml-80 lg:ml-80 md:ml-0 ml-0 flex min-h-screen items-center justify-center bg-gray-200 to-gray-100 dark:bg-gray-700 text-gray-800">
-        <div class="container flex h-[87vh] w-full flex-col overflow-hidden bg-gray-100 sm:flex-row mt-20 rounded-lg">
+        <div class="container flex h-[87vh] w-full flex-col overflow-hidden bg-gray-100 dark:bg-gray-900 sm:flex-row mt-20 rounded-lg">
             <!-- List of contacts -->
 
             @livewire('messages.search-contacts')

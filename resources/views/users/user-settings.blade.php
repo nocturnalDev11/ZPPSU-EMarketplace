@@ -21,7 +21,7 @@
                                 <input name="profile_picture" id="dropzone-file" type="file" class="hidden" />
                             </label>
                         </div>
-    
+
                         @php
                             $baseClasses = 'h-64 w-64 mb-2 justify-center items-center hidden';
                             $additionalClasses = 'flex';
@@ -30,7 +30,7 @@
                         <div id="image-preview" class="{{ $allClasses }}">
                             <!-- Dynamically adds image preview -->
                         </div>
-    
+
                         <button type="submit" class="mt-2 text-white inline-flex items-center bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-md px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                             <svg class="mr-1 -ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
@@ -167,21 +167,21 @@
         const middleNameInput = document.getElementById('middle_name');
         const lastNameInput = document.getElementById('last_name');
         const outputText = document.getElementById('output-text');
-    
+
         function updateOutputText() {
             outputText.textContent = `${firstNameInput.value} ${middleNameInput.value} ${lastNameInput.value}`;
         }
-    
+
         firstNameInput.addEventListener('input', updateOutputText);
         middleNameInput.addEventListener('input', updateOutputText);
         lastNameInput.addEventListener('input', updateOutputText);
-    
+
         document.addEventListener('DOMContentLoaded', function() {
             function setupFileUploadAndPreview(dropzoneId, imagePreviewContainerId, dropzoneContainerId) {
                 const dropzone = document.getElementById(dropzoneId);
                 const imagePreviewContainer = document.getElementById(imagePreviewContainerId);
                 const dropzoneContainer = document.getElementById(dropzoneContainerId);
-    
+
                 dropzone.addEventListener('change', function(event) {
                     const file = event.target.files[0];
                     if (file) {
@@ -189,16 +189,16 @@
                         reader.readAsDataURL(file);
                         reader.onload = function(e) {
                             const imgSrc = e.target.result;
-    
+
                             const imgElement = document.createElement('img');
                             imgElement.src = imgSrc;
                             imgElement.className = 'w-full h-full object-cover rounded-lg';
-    
+
                             imagePreviewContainer.innerHTML = '';
                             imagePreviewContainer.appendChild(imgElement);
-    
+
                             imagePreviewContainer.classList.remove('hidden');
-    
+
                             dropzoneContainer.style.display = 'none';
                         };
                     } else {
@@ -206,7 +206,7 @@
                     }
                 });
             }
-    
+
             setupFileUploadAndPreview('dropzone-file', 'image-preview', 'dropzone-container');
         });
     </script>
