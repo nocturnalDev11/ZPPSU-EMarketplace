@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -8,13 +10,18 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function ($middleware) {
+    ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'admin' => \App\Http\Middleware\AdminMiddleware::class,
-            'auth' => \App\Http\Middleware\Authenticate::class,
-            'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+            'guest.admin' => \App\Http\Middleware\RedirectAdminIfAuthenticated::class,
         ]);
+        $middleware->redirectGuestsTo(function () {
+            if (str_starts_with(request()->path(), 'admin')) {
+                return route('admin.login');
+            }
+
+            return route('login');
+        });
     })
-    ->withExceptions(function ($exceptions) {
+    ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
