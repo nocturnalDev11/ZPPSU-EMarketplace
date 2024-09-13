@@ -1,41 +1,51 @@
-@extends('users.layouts.menu')
+@extends('users.layouts.nav')
 
 @section('content')
     <div class="xl:ml-80 lg:ml-80 md:ml-0 ml-0 flex min-h-screen items-center justify-center bg-gray-200 to-gray-100 dark:bg-gray-700 text-gray-800">
         <div class="container flex h-[87vh] w-full flex-col overflow-hidden bg-gray-100 dark:bg-gray-900 sm:flex-row mt-20 rounded-lg">
             <!-- List of contacts -->
 
-            @livewire('messages.search-contacts')
+            @livewire('messages.search-contact')
 
             <!-- Chat Content -->
             <div class="content flex h-full w-full flex-col sm:w-3/5 lg:w-2/3">
                 @if(isset($selectedUser))
                     <!-- Contact Profile -->
-                    <div class="flex items-center bg-white dark:bg-gray-900 px-5 py-4">
-                        @if($selectedUser->profile_picture)
-                            <div class="relative inline-flex items-center justify-center object-cover ml-6 mr-2">
-                                <img src="{{ asset('storage/' . $selectedUser->profile_picture) }}" alt="profile_image" class="object-cover rounded-full shadow-soft-sm h-10 w-10" />
-                            </div>
-                        @else
-                            <div class="h-10 w-10 relative inline-flex items-center justify-center object-cover ml-6 mr-2 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-600">
-                                <span class="p-2 font-medium text-xl text-gray-600 dark:text-gray-300">
-                                    {{ strtoupper(substr($selectedUser->first_name, 0, 1)) }}{{ strtoupper(substr($selectedUser->last_name, 0, 1)) }}
-                                </span>
-                            </div>
-                        @endif
-                        <div class="flex flex-col">
-                            <p class="ml-4 dark:text-white">{{ $selectedUser->first_name }} {{ $selectedUser->last_name }}</p>
-                            @if (empty($selectedUser->department))
-                                <p class="ml-4 text-sm text-gray-600 dark:text-white">
-                                    @if (!empty($selectedUser->role))
-                                        {{ $selectedUser->role }}
-                                    @endif
-                                </p>
+                    <div class="flex-col items-center justify-between bg-white dark:bg-gray-900 px-5 py-4">
+                        <div class="flex mb-3">
+                            @if($selectedUser->profile_picture)
+                                <div class="relative inline-flex items-center justify-center object-cover ml-6 mr-2">
+                                    <img src="{{ asset('storage/' . $selectedUser->profile_picture) }}" alt="profile_image" class="object-cover rounded-full shadow-soft-sm h-10 w-10" />
+                                </div>
                             @else
-                                <p class="ml-4 text-sm text-gray-600 dark:text-white">
-                                    {{ $selectedUser->role }} • {{ $selectedUser->department }}
-                                </p>
+                                <div class="h-10 w-10 relative inline-flex items-center justify-center object-cover ml-6 mr-2 rounded-full overflow-hidden bg-gray-200 dark:bg-gray-600">
+                                    <span class="p-2 font-medium text-xl text-gray-600 dark:text-gray-300">
+                                        {{ strtoupper(substr($selectedUser->first_name, 0, 1)) }}{{ strtoupper(substr($selectedUser->last_name, 0, 1)) }}
+                                    </span>
+                                </div>
                             @endif
+                            <div class="flex flex-col">
+                                <a href="{{ route('profile.show', ['id' => $selectedUser]) }}" wire:navigate class="ml-4 dark:text-white hover:underline">{{ $selectedUser->first_name }} {{ $selectedUser->last_name }}</a>
+                                @if (empty($selectedUser->department))
+                                    <p class="ml-4 text-sm text-gray-600 dark:text-white">
+                                        @if (!empty($selectedUser->role))
+                                            {{ $selectedUser->role }}
+                                        @endif
+                                    </p>
+                                @else
+                                    <p class="ml-4 text-sm text-gray-600 dark:text-white">
+                                        {{ $selectedUser->role }} • {{ $selectedUser->department }}
+                                    </p>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="flex w-full gap-2">
+                            <div class="w-full">
+                                @include('users.messages.create-plan-modal')
+                            </div>
+                            <button type="button" class="w-full text-gray-600 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+                                More options
+                            </button>
                         </div>
                     </div>
 
@@ -91,10 +101,27 @@
                                                         @endif
                                                     </div>
                                                 </div>
+                                            @elseif($message->plan_meetup)
+                                                <div class="flex items-start gap-2.5">
+                                                    <div class="flex flex-col w-full max-w-[320px] leading-1.5">
+                                                        <div class="flex">
+                                                            {{-- <p class="text-lg font-normal pb-2.5 text-gray-900 dark:text-white">
+                                                                {{ $message->plan_meetup }}
+                                                            </p> --}}
+                                                            <p class="text-lg font-normal pb-2.5 text-gray-900 dark:text-white">
+                                                                {{ $message->plan_meetup }}
+                                                            </p>
+                                                        </div>
+                                                        @if($message->plan_notes)
+                                                            <p class="text-lg font-normal pb-2.5 text-gray-900 dark:text-white">
+                                                                {{ $message->plan_notes }}
+                                                            </p>
+                                                        @endif
+                                                    </div>
+                                                </div>
                                             @endif
                                         </div>
-                                        <!-- Sender profile picture -->
-                                        <img class="w-8 h-8 rounded-full" src="{{ $message->sender->profile_picture ? asset('storage/' . $message->sender->profile_picture) : asset('storage/profile_pictures/profile-placeholder.jpg') }}" alt="{{ $message->sender->first_name }}'s image">
+
                                     </div>
                                 </div>
                             @else
@@ -102,7 +129,17 @@
                                 <div class="flex justify-start mb-4">
                                     <div class="flex items-start gap-2.5">
                                         <!-- Recipient profile picture -->
-                                        <img class="w-8 h-8 rounded-full" src="{{ $selectedUser->profile_picture ? asset('storage/' . $selectedUser->profile_picture) : asset('storage/profile_pictures/profile-placeholder.jpg') }}" alt="{{ $selectedUser->first_name }} {{ $selectedUser->last_name }} image">
+                                        @if($selectedUser->profile_picture)
+                                            <div class="relative inline-flex items-center justify-center overflow-hidden ml-6 mr-2 h-8 w-8 rounded-full">
+                                                <img class="object-cover w-full h-full" src="{{ asset('storage/' . $selectedUser->profile_picture) }}" alt="{{ $selectedUser->first_name }} {{ $selectedUser->last_name }} image">
+                                            </div>
+                                        @else
+                                            <div class="h-8 w-8 relative inline-flex items-center justify-center overflow-hidden ml-5 mr-2 rounded-full bg-gray-200 dark:bg-gray-600">
+                                                <span class="p-2 font-medium text-sm text-gray-600 dark:text-gray-300">
+                                                    {{ strtoupper(substr($selectedUser->first_name, 0, 1)) }}{{ strtoupper(substr($selectedUser->last_name, 0, 1)) }}
+                                                </span>
+                                            </div>
+                                        @endif
                                         <div class="flex flex-col gap-1">
                                             <div class="flex flex-col w-full max-w-[326px] leading-1.5 p-4 border-gray-200 bg-gray-200 rounded-e-xl rounded-es-xl dark:bg-gray-700">
                                                 <!-- Recipient username and message time -->
@@ -155,6 +192,8 @@
                                                             @endif
                                                         </div>
                                                     </div>
+                                                @elseif($message->plan_meetup)
+                                                    <p>{{ $message->plan_meetup }}</p>
                                                 @endif
                                             </div>
                                         </div>
@@ -204,4 +243,63 @@
             </div>
         </div>
     </div>
+    <script>
+            const fileInput = document.getElementById('fileInput');
+    const preview = document.getElementById('preview');
+
+    if (fileInput) {
+        fileInput.addEventListener('change', (event) => {
+            const files = Array.from(event.target.files);
+            preview.innerHTML = ''; // Clear the preview area
+
+            files.forEach((file) => {
+                const fileReader = new FileReader();
+                fileReader.readAsDataURL(file);
+
+                fileReader.onload = (e) => {
+                    const url = e.target.result;
+                    const size = file.size > 1024 ? (file.size > 1048576 ? Math.round(file.size / 1048576) + 'mb' : Math.round(file.size / 1024) + 'kb') : file.size + 'b';
+                    const previewType = ['jpg', 'jpeg', 'png', 'gif'].includes(file.name.split('.').pop().toLowerCase());
+
+                    const div = document.createElement('div');
+                    div.classList.add('relative', 'w-32', 'h-32', 'object-cover', 'rounded', 'mb-2');
+
+                    if (previewType) {
+                        div.innerHTML = `
+                            <img src="${url}" class="w-32 h-32 object-cover rounded">
+                            <button class="remove-btn w-6 h-6 absolute text-center flex items-center top-0 right-0 m-2 text-white text-lg bg-red-500 hover:bg-red-500 rounded-full">
+                                <span class="mx-auto my-auto">
+                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                                    </svg>
+                                </span>
+                            </button>
+                            <div class="text-xs text-center pb-3">${size}</div>
+                        `;
+                    } else {
+                        div.innerHTML = `
+                            <svg class="fill-current w-32 h-32 ml-auto pt-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M15 2v5h5v15h-16v-20h11zm1-2h-14v24h20v-18l-6-6z" />
+                            </svg>
+                            <button class="remove-btn w-6 h-6 absolute text-center flex items-center top-0 right-0 m-2 text-white text-lg bg-red-500 hover:bg-red-500 rounded-full">
+                                <span class="mx-auto my-auto">
+                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                                    </svg>
+                                </span>
+                            </button>
+                            <div class="text-xs pb-3 text-center">${size}</div>
+                        `;
+                    }
+
+                    preview.appendChild(div);
+
+                    div.querySelector('.remove-btn').addEventListener('click', () => {
+                        div.remove();
+                    });
+                };
+            });
+        });
+    }
+    </script>
 @endsection

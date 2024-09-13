@@ -1,4 +1,6 @@
-@extends('layouts.nav')
+
+@extends('users.layouts.nav')
+
 @section('content')
     <section class="pt-48 h-screen dark:bg-gray-900">
         <div class="container flex flex-col justify-center mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">

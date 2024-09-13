@@ -1,4 +1,4 @@
-@extends('users.layouts.menu')
+@extends('users.layouts.nav')
 
 @section('content')
     <section class="bg-white mt-24">

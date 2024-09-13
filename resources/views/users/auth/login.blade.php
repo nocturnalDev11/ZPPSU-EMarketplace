@@ -1,4 +1,4 @@
-@extends('layouts.nav')
+@extends('users.layouts.nav')
 
 @section('content')
 <div class="font-[sans-serif] dark:bg-gray-900">

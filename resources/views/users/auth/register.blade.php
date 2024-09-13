@@ -1,4 +1,4 @@
-@extends('layouts.nav')
+@extends('users.layouts.nav')
 
 @section('content')
     <div class="w-full h-screen dark:bg-gray-900">
