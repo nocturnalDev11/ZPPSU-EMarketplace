@@ -15,13 +15,18 @@ return new class extends Migration
             $table->id();
             $table->foreignId('sender_id')->constrained('users')->onDelete('cascade')->nullable();
             $table->foreignId('recipient_id')->constrained('users')->onDelete('cascade')->nullable();
-            $table->text('content')->nullable();
+            $table->longText('content')->nullable();
             $table->string('image')->nullable();
             $table->string('video')->nullable();
             $table->string('content_title')->nullable();
             $table->string('content_link')->nullable();
             $table->string('content_link_image')->nullable();
-            $table->string('content_link_description')->nullable();
+            $table->longText('content_link_description')->nullable();
+            $table->date('plan_date')->nullable();
+            $table->time('plan_time')->nullable();
+            $table->string('plan_meetup')->nullable();
+            $table->string('plan_location')->nullable();
+            $table->string('plan_notes')->nullable();
             $table->timestamps();
         });
     }

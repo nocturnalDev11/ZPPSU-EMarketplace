@@ -13,22 +13,22 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('avatar')->nullable();
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('name');
             $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
 
-        Schema::create('admin_sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
-            $table->foreignId('admin_id')->nullable()->index();
-            $table->string('ip_address', 45)->nullable();
-            $table->text('admin_agent')->nullable();
-            $table->longText('payload');
-            $table->integer('last_activity')->index();
-        });
+        // Schema::create('admin_sessions', function (Blueprint $table) {
+        //     $table->string('id')->primary();
+        //     $table->foreignId('admin_id')->nullable()->index();
+        //     $table->string('ip_address', 45)->nullable();
+        //     $table->text('admin_agent')->nullable();
+        //     $table->longText('payload');
+        //     $table->integer('last_activity')->index();
+        // });
     }
 
     /**
@@ -37,6 +37,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('admins');
-        Schema::dropIfExists('admin_sessions');
+        // Schema::dropIfExists('admin_sessions');
     }
 };

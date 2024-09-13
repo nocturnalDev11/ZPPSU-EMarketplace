@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('middle_name')->nullable();
             $table->string('last_name');
             $table->string('suffix')->nullable();
-            $table->date('dob');
-            $table->string('gender');
+            $table->date('dob')->nullable();
+            $table->string('gender')->nullable();
             $table->string('role');
             $table->string('department')->nullable();
             $table->string('about')->nullable();
