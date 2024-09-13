@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -30,6 +31,7 @@ class AdminController extends Controller
 
     public function logout()
     {
+        Session::flush();
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
     }

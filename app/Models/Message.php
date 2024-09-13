@@ -13,6 +13,13 @@ class Message extends Model
         'image',
         'video',
         'content_link',
+        'content_link_image',
+        'content_link_description',
+        'plan_meetup',
+        'plan_date',
+        'plan_time',
+        'plan_location',
+        'plan_notes',
         'created_at'
     ];
 
