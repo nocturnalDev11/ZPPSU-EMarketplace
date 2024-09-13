@@ -1,76 +1,50 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Users\HomeController;
-use App\Http\Controllers\Users\ProfileController;
-use App\Http\Controllers\Users\MessagesController;
+use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\MessagesController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\Users\UserController;
-use App\Http\Controllers\Users\Auth\LoginController;
-use App\Http\Controllers\Users\Lists\PostController;
-use App\Http\Controllers\Users\Layouts\NavController;
-use App\Http\Controllers\Users\Lists\TradeController;
-use App\Http\Controllers\Users\Lists\SearchController;
-use App\Http\Controllers\Users\Auth\RegisterController;
-use App\Http\Controllers\Users\Lists\ProductController;
-use App\Http\Controllers\Users\Lists\ServiceController;
-use App\Http\Controllers\Admin\Auth\AdminAuthController;
-use App\Http\Controllers\Admin\Layouts\NavController as AdminNavController;
+use App\Http\Controllers\User\Lists\PostController;
+use App\Http\Controllers\User\Lists\TradeController;
+use App\Http\Controllers\User\Lists\SearchController;
+use App\Http\Controllers\User\Lists\ProductController;
+use App\Http\Controllers\User\Lists\ServiceController;
+use App\Http\Controllers\Admin\Users\UserManagementController;
 
-
+// Public route for welcome page
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('login', [LoginController::class, 'login']);
-Route::post('logout', [NavController::class, 'logout'])->name('logout');
+// User Routes
+Route::prefix('user')->group(function () {
+    // Authentication routes for users
+    Route::get('login', [UserController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [UserController::class, 'login']);
 
-Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('register', [RegisterController::class, 'register']);
+    Route::get('register', [UserController::class, 'showRegistrationForm'])->name('register');
+    Route::post('register', [UserController::class, 'register']);
 
-/*
-|------------------------------------------------------------------------------
-| Routes for authenticated users
-|------------------------------------------------------------------------------
-*/
+    Route::post('logout', [UserController::class, 'logout'])->name('logout');
+});
 
-Route::group(['middleware' => 'auth'], function () {
-
-    /*
-    |--------------------------------------------------------------------------
-    | Route to users' profile (both with and without ID)
-    |--------------------------------------------------------------------------
-    */
-
+// Authenticated user routes
+Route::middleware('auth')->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('/profile/{id?}', [ProfileController::class, 'show'])->name('users.profile');
         Route::get('/home', [HomeController::class, 'index'])->name('users.home');
     });
-
     Route::prefix('profile')->group(function () {
-        Route::get('/', [NavController::class, 'index'])->name('profile');
+        Route::get('/', [UserController::class, 'userMenu']);
         Route::get('/{id}', [ProfileController::class, 'show'])->name('profile.show');
         Route::get('/{id}/activities', [ProfileController::class, 'activities'])->name('profile.activities');
         Route::get('/{id}/edit', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::post('/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
         Route::post('/profile/update-picture', [ProfileController::class, 'updateProfilePicture'])->name('profile.update.picture');
     });
-
-    /*
-    |--------------------------------------------------------------------------
-    | Route for searching user, products, services, posts and trades
-    |--------------------------------------------------------------------------
-    */
-
-    Route::get('/search', [SearchController::class, 'search'])->name('search');
-
-    /*
-    |--------------------------------------------------------------------------
-    | Route to message section
-    |--------------------------------------------------------------------------
-    */
-
     Route::prefix('messages')->group(function () {
         Route::get('/', [MessagesController::class, 'index'])->name('messages.index');
         Route::post('/reply/{user}', [MessagesController::class, 'reply'])->name('messages.reply');
@@ -78,8 +52,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [MessagesController::class, 'store'])->name('messages.store');
         Route::delete('/{message}', [MessagesController::class, 'destroy'])->name('messages.destroy');
     });
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
 
-    /*
+        /*
     |--------------------------------------------------------------------------
     | PRODUCT routes
     |--------------------------------------------------------------------------
@@ -93,7 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
     });
 
-    /*
+        /*
     |--------------------------------------------------------------------------
     | SERVICES routes
     |--------------------------------------------------------------------------
@@ -108,7 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
     });
 
-    /*
+        /*
     |--------------------------------------------------------------------------
     | POST routes
     |--------------------------------------------------------------------------
@@ -134,33 +109,29 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
-/*
-|--------------------------------------------------------------------------
-| Admin routes
-|--------------------------------------------------------------------------
-*/
-Route::prefix('admin')->name('admin.')->group(function () {
-    // Admin Auth Routes
-    Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('login');
-    Route::post('login', [AdminAuthController::class, 'login']);
-    Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
+// Admin Routes
+Route::prefix('admin')->group(function () {
+    // Guest admin routes (when not logged in)
+    Route::middleware('guest.admin')->name('admin.')->group(function () {
+        Route::get('login', [AdminController::class, 'showLoginForm'])->name('login');
+        Route::post('login', [AdminController::class, 'login']);
+    });
 
-    // Admin Dashboard
+    // Authenticated admin routes
     Route::middleware('auth:admin')->group(function () {
-        Route::get('/', [AdminNavController::class, 'index'])->name('admin.nav');
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+        Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');
 
         /*
         |--------------------------------------------------------------------------
         | User CRUD routes
         |--------------------------------------------------------------------------
         */
-        Route::get('users/profile/{id}', [UserController::class, 'show'])->name('users.profile.show');
-        Route::get('/users', [UserController::class, 'index'])->name('users.list');
-        Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-        Route::post('/users', [UserController::class, 'store'])->name('users.store');
-        Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-        Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+        Route::get('user/create', [UserManagementController::class, 'store'])->name('create.user');
+        Route::get('user/view/{id}', [UserManagementController::class, 'show'])->name('view.user');
+        Route::get('all/users', [UserManagementController::class, 'index'])->name('all.users');
+        Route::get('{user}/edit', [UserManagementController::class, 'edit'])->name('edit.user');
+        Route::put('/users/{user}', [UserManagementController::class, 'update'])->name('update.user');
+        Route::delete('users/{user}', [UserManagementController::class, 'destroy'])->name('delete.user');
     });
 });
