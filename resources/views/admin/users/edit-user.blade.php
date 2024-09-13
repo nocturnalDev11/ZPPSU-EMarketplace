@@ -136,17 +136,17 @@
 
                 <div class="col-span-2">
                     <div class="flex flex-col lg:flex-row items-center bg-white shadow-lg shadow-gray-200 rounded-2xl p-4 mb-6">
-                        <form action="{{ route('profile.update', $user->id) }}" method="POST" class="w-full">
+                        <form action="{{ route('update.user', $user->id) }}" method="POST" class="w-full">
                             @csrf
-                            @method('POST')
+                            @method('PUT')
                             <div class="grid sm:grid-cols-2 gap-6">
-                                <!-- First name -->
+                                <!-- First name and middle name -->
                                 <div class="sm:col-span-2 flex space-x-4 w-full">
                                     <div class="w-1/2">
                                         <label for="first_name" class="block text-sm font-medium text-gray-500 dark:text-white">{{ __('First name') }}</label>
                                         <input type="text" id="first_name" name="first_name" class="mt-1 p-2 w-full text-gray-800 text-sm border px-4 py-3 rounded-md border-gray-300 focus:border-gray-200 focus:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-300 dark:text-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:focus:border-gray-500 dark:focus:ring-2 dark:focus:ring-gray-500 dark:focus:ring-offset-0 dark:focus:ring-opacity-50 @error('first_name') is-invalid @enderror" value="{{ $user->first_name }}" required>
                                         @error('first_name')
-                                            <span class="invalid-feedback" role="alert">
+                                            <span class="invalid-feedback text-red-700 dark:text-red-500" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
@@ -155,7 +155,7 @@
                                         <label for="middle_name" class="block text-sm font-medium text-gray-500 dark:text-white">{{ __('Middle name') }}</label>
                                         <input type="text" id="middle_name" name="middle_name" class="mt-1 p-2 w-full text-gray-800 text-sm border px-4 py-3 rounded-md border-gray-300 focus:border-gray-200 focus:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-300 dark:text-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:focus:border-gray-500 dark:focus:ring-2 dark:focus:ring-gray-500 dark:focus:ring-offset-0 dark:focus:ring-opacity-50 @error('middle_name') is-invalid @enderror" value="{{ $user->middle_name }}">
                                         @error('middle_name')
-                                            <span class="invalid-feedback" role="alert">
+                                            <span class="invalid-feedback text-red-700 dark:text-red-500" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
@@ -167,7 +167,7 @@
                                         <label for="last_name" class="block text-sm font-medium text-gray-500 dark:text-white">{{ __('Last name') }}</label>
                                         <input type="text" id="last_name" name="last_name" class="mt-1 p-2 w-full text-gray-800 text-sm border px-4 py-3 rounded-md border-gray-300 focus:border-gray-200 focus:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-300 dark:text-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:focus:border-gray-500 dark:focus:ring-2 dark:focus:ring-gray-500 dark:focus:ring-offset-0 dark:focus:ring-opacity-50 @error('last_name') is-invalid @enderror" value="{{ $user->last_name }}" required>
                                         @error('last_name')
-                                            <span class="invalid-feedback" role="alert">
+                                            <span class="invalid-feedback text-red-700 dark:text-red-500" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
@@ -180,7 +180,7 @@
                                             <option value="Sr" {{ $user->suffix == 'Sr' ? 'selected' : '' }}>Sr</option>
                                         </select>
                                         @error('suffix')
-                                            <span class="invalid-feedback" role="alert">
+                                            <span class="invalid-feedback text-red-700 dark:text-red-500" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
@@ -193,7 +193,7 @@
                                         <label for="dob" class="block text-sm font-medium text-gray-500 dark:text-white">{{ __('Date of birth') }}</label>
                                         <input type="date" id="dob" name="dob" class="mt-1 p-2 w-full text-gray-800 text-sm border px-4 py-3 rounded-md border-gray-300 focus:border-gray-200 focus:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-300 dark:text-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:focus:border-gray-500 dark:focus:ring-2 dark:focus:ring-gray-500 dark:focus:ring-offset-0 dark:focus:ring-opacity-50 @error('dob') is-invalid @enderror" value="{{ $user->dob }}">
                                         @error('dob')
-                                            <span class="invalid-feedback" role="alert">
+                                            <span class="invalid-feedback text-red-700 dark:text-red-500" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
@@ -207,20 +207,75 @@
                                             <option value="Other" {{ $user->gender == 'Other' ? 'selected' : '' }}>Other</option>
                                         </select>
                                         @error('gender')
-                                            <span class="invalid-feedback" role="alert">
+                                            <span class="invalid-feedback text-red-700 dark:text-red-500" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="sm:col-span-2">
-                                    <label for="about" class="block text-sm font-medium text-gray-500 dark:text-white">{{ __('About') }}</label>
-                                    <textarea id="about" name="about" rows="4" class="mt-1 p-2 w-full text-gray-800 text-sm border px-4 py-3 rounded-md border-gray-300 focus:border-gray-200 focus:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-300 dark:text-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:focus:border-gray-500 dark:focus:ring-2 dark:focus:ring-gray-500 dark:focus:ring-offset-0 dark:focus:ring-opacity-50 @error('about') is-invalid @enderror" value="{{ $user->about }}"></textarea>
-                                    @error('about')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                <!-- Role and department -->
+                                <div class="sm:col-span-2 flex space-x-4 w-full">
+                                    <!-- role -->
+                                    <div class="w-1/2">
+                                        <label for="role" class="block text-sm font-medium text-gray-500 dark:text-white">{{ __('Role') }}</label>
+                                        <select id="role" name="role" class="mt-1 p-2 w-full text-gray-800 text-sm border px-4 py-3 rounded-md border-gray-300 focus:border-gray-200 focus:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-300 dark:text-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:focus:border-gray-500 dark:focus:ring-2 dark:focus:ring-gray-500 dark:focus:ring-offset-0 dark:focus:ring-opacity-50 @error('role') is-invalid @enderror">
+                                            <option value="Student" {{ $user->role == 'Student' ? 'selected' : '' }}>Student</option>
+                                            <option value="Faculty" {{ $user->role == 'Faculty' ? 'selected' : '' }}>Faculty</option>
+                                            <option value="Staff" {{ $user->role == 'Staff' ? 'selected' : '' }}>Staff</option>
+                                        </select>
+                                        @error('role')
+                                            <span class="invalid-feedback text-red-700 dark:text-red-500" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <!-- Department -->
+                                    <div class="w-1/2">
+                                        <label for="department" class="block text-sm font-medium text-gray-500 dark:text-white">{{ __('Department') }}</label>
+                                        <select id="department" name="department" class="mt-1 p-2 w-full text-gray-800 text-sm border px-4 py-3 rounded-md border-gray-300 focus:border-gray-200 focus:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-300 dark:text-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:focus:border-gray-500 dark:focus:ring-2 dark:focus:ring-gray-500 dark:focus:ring-offset-0 dark:focus:ring-opacity-50 @error('department') is-invalid @enderror">
+                                            <option value="CICS" {{ $user->department== 'CICS' ? 'selected' : '' }}>CICS</option>
+                                            <option value="CME" {{ $user->department == 'CME' ? 'selected' : '' }}>CME</option>
+                                            <option value="CTE" {{ $user->department == 'CTE' ? 'selected' : '' }}>CTE</option>
+                                            <option value="CET" {{ $user->department == 'CET' ? 'selected' : '' }}>CET</option>
+                                            <option value="CAHSS" {{ $user->department == 'CAHSS' ? 'selected' : '' }}>CAHSS</option>
+                                            <option value="SBA" {{ $user->department == 'SBA' ? 'selected' : '' }}>SBA</option>
+                                            <option value="SHS" {{ $user->department == 'SHS' ? 'selected' : '' }}>SHS</option>
+                                            <option value="DRRMO" {{ $user->department == 'DRRMO' ? 'selected' : '' }}>DRRMO</option>
+                                            <option value="Registrar" {{ $user->department == 'Registrar' ? 'selected' : '' }}>Registrar</option>
+                                            <option value="Admissions Office" {{ $user->department == 'Admissions Office' ? 'selected' : '' }}>Admissions Office</option>
+                                            <option value="Guidance and Couseling" {{ $user->department == 'Guidance and Couseling' ? 'Guidance and Couseling' : '' }}>Guidance and Couseling</option>
+                                            <option value="Medical-Dental Health Services" {{ $user->department == 'Medical-Dental Health Services' ? 'selected' : '' }}>Medical-Dental Health Services</option>
+                                            <option value="Learning Commons Center" {{ $user->department == 'Learning Commons Center' ? 'selected' : '' }}>Learning Commons Center</option>
+                                        </select>
+                                        @error('department')
+                                            <span class="invalid-feedback text-red-700 dark:text-red-500" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!-- University id and Username -->
+                                <div class="sm:col-span-2 flex space-x-4 w-full">
+                                    <!-- University ID -->
+                                    <div class="w-1/2">
+                                        <label for="university_id" class="block text-sm font-medium text-gray-500 dark:text-white">{{ __('University ID') }}</label>
+                                        <input type="text" id="university_id" name="university_id" class="mt-1 p-2 w-full text-gray-800 text-sm border px-4 py-3 rounded-md border-gray-300 focus:border-gray-200 focus:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-300 dark:text-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:focus:border-gray-500 dark:focus:ring-2 dark:focus:ring-gray-500 dark:focus:ring-offset-0 dark:focus:ring-opacity-50 @error('university_id') is-invalid @enderror" value="{{ $user->university_id }}">
+                                        @error('university_id')
+                                            <span class="invalid-feedback text-red-700 dark:text-red-500" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                    <!-- Username -->
+                                    <div class="w-1/2">
+                                        <label for="username" class="block text-sm font-medium text-gray-500 dark:text-white">{{ __('Username') }}</label>
+                                        <input type="text" id="username" name="username" class="mt-1 p-2 w-full text-gray-800 text-sm border px-4 py-3 rounded-md border-gray-300 focus:border-gray-200 focus:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-300 dark:text-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:focus:border-gray-500 dark:focus:ring-2 dark:focus:ring-gray-500 dark:focus:ring-offset-0 dark:focus:ring-opacity-50 @error('username') is-invalid @enderror" value="{{ $user->username }}">
+                                        @error('username')
+                                            <span class="invalid-feedback text-red-700 dark:text-red-500" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
                                 <div class="sm:col-span-2 flex space-x-4 w-full">
                                     <!-- Contact number -->
@@ -228,7 +283,7 @@
                                         <label for="contact_number" class="block text-sm font-medium text-gray-500 dark:text-white">{{ __('Contact number') }}</label>
                                         <input type="text" id="contact_number" name="contact_number" class="mt-1 p-2 w-full text-gray-800 text-sm border px-4 py-3 rounded-md border-gray-300 focus:border-gray-200 focus:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-300 dark:text-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:focus:border-gray-500 dark:focus:ring-2 dark:focus:ring-gray-500 dark:focus:ring-offset-0 dark:focus:ring-opacity-50 @error('email') is-invalid @enderror" value="{{ $user->contact_number }}">
                                         @error('contact_number')
-                                            <span class="invalid-feedback" role="alert">
+                                            <span class="invalid-feedback text-red-700 dark:text-red-500" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
@@ -238,7 +293,7 @@
                                         <label for="email" class="block text-sm font-medium text-gray-500 dark:text-white">{{ __('Email Address') }}</label>
                                         <input type="email" id="email" name="email" class="mt-1 p-2 w-full text-gray-800 text-sm border px-4 py-3 rounded-md border-gray-300 focus:border-gray-200 focus:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-300 dark:text-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:focus:border-gray-500 dark:focus:ring-2 dark:focus:ring-gray-500 dark:focus:ring-offset-0 dark:focus:ring-opacity-50 @error('email') is-invalid @enderror" value="{{ $user->email }}">
                                         @error('email')
-                                            <span class="invalid-feedback" role="alert">
+                                            <span class="invalid-feedback text-red-700 dark:text-red-500" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
@@ -249,11 +304,14 @@
                                     <label for="home_address" class="block text-sm font-medium text-gray-500 dark:text-white">{{ __('Home address') }}</label>
                                     <input type="text" id="home_address" name="home_address" class="mt-1 p-2 w-full text-gray-800 text-sm border px-4 py-3 rounded-md border-gray-300 focus:border-gray-200 focus:ring-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-300 dark:text-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:focus:border-gray-500 dark:focus:ring-2 dark:focus:ring-gray-500 dark:focus:ring-offset-0 dark:focus:ring-opacity-50 @error('email') is-invalid @enderror" value="{{ $user->home_address }}">
                                     @error('home_address')
-                                        <span class="invalid-feedback" role="alert">
+                                        <span class="invalid-feedback text-red-700 dark:text-red-500" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
+                            </div>
+                            <div class="flex justify-center my-2">
+                                <button type="submit" class="w-full py-2 bg-gradient-to-r from-gray-100 to-gray-200 hover:bg-gradient-to-bl text-gray-500 text-lg font-semibold rounded-md hover:bg-yellow transition-colors duration-300">{{ __('Update details') }}</button>
                             </div>
                         </form>
                     </div>
