@@ -1,33 +1,37 @@
 @extends('admin.layouts.nav')
 
 @section('content')
-<div id="main-content" class="flex overflow-hidden bg-gray-50 dark:bg-gray-900 transition-all ml-80 h-full">
-    <div class="relative w-full overflow-y-auto pt-24">
-        <main>
-            <nav class="flex mb-5" aria-label="Breadcrumb">
-                <ol class="inline-flex items-center space-x-1 md:space-x-2">
-                    <li class="inline-flex items-center">
-                        <a href="{{ route('admin.dashboard') }}" wire:navigate class="inline-flex items-center text-gray-700 hover:text-gray-900">
-                            <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-                            </svg>
-                            <span class="ml-1 text-sm font-medium text-gray-400 md:ml-2" aria-current="page">Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                            </svg>
-                            <span class="ml-1 text-sm font-medium text-gray-700 md:ml-2" aria-current="page">Users</span>
-                        </div>
-                    </li>
-                </ol>
-            </nav>
+<main class="flex overflow-hidden h-screen w-full dark:bg-gray-900">
+    <div class="relative w-full overflow-y-auto pt-16">
+            <div class="col-span-full mb-5 xl:mb-5 px-4">
+                <nav class="flex mb-5">
+                    <ol class="inline-flex items-center space-x-1 md:space-x-2">
+                        <li class="inline-flex items-center">
+                            <a href="{{ route('admin.dashboard') }}" wire:navigate class="inline-flex items-center text-gray-700 hover:text-gray-900">
+                                <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                                </svg>
+                                <span class="ml-1 text-sm font-medium text-gray-400 md:ml-2" aria-current="page">Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="ml-1 text-sm font-medium text-gray-700 md:ml-2" aria-current="page">Users</span>
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
+                <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl">
+                    All users
+                </h1>
+            </div>
 
             <div class="grid gap-4 px-4 md:grid-cols-2 xl:grid-cols-4">
                 <!-- Total Users -->
-                <div class="p-4 bg-white rounded-lg shadow-md sm:p-6 dark:bg-gray-800">
+                <div class="p-4 bg-gray-50 rounded-lg shadow-md sm:p-6 dark:bg-gray-800">
                     <div class="px-4 text-gray-600 dark:text-gray-400">
                         <h3>Total users</h3>
                     </div>
@@ -49,7 +53,7 @@
                 </div>
 
                 <!-- Total Students -->
-                <div class="p-4 bg-white rounded-lg shadow-md sm:p-6 dark:bg-gray-800">
+                <div class="p-4 bg-gray-50 rounded-lg shadow-md sm:p-6 dark:bg-gray-800">
                     <div class="px-4 text-gray-600 dark:text-gray-400">
                         <h3>Total students</h3>
                     </div>
@@ -68,7 +72,7 @@
                 </div>
 
                 <!-- Total Faculties -->
-                <div class="p-4 bg-white rounded-lg shadow-md sm:p-6 dark:bg-gray-800">
+                <div class="p-4 bg-gray-50 rounded-lg shadow-md sm:p-6 dark:bg-gray-800">
                     <div class="px-4 text-gray-600 dark:text-gray-400">
                         <h3>Total faculties</h3>
                     </div>
@@ -87,7 +91,7 @@
                 </div>
 
                 <!-- Total Staff -->
-                <div class="p-4 bg-white rounded-lg shadow-md sm:p-6 dark:bg-gray-800">
+                <div class="p-4 bg-gray-50 rounded-lg shadow-md sm:p-6 dark:bg-gray-800">
                     <div class="px-4 text-gray-600 dark:text-gray-400">
                         <h3>Total staff</h3>
                     </div>
@@ -106,7 +110,7 @@
                 </div>
             </div>
 
-            <div class="mx-4 my-6 gap-4 bg-white rounded-lg shadow-md sm:p-6 dark:bg-gray-800">
+            <div class="mx-4 my-6 gap-4 bg-gray-50 rounded-lg shadow-md sm:p-6 dark:bg-gray-800">
                 <!-- Card header -->
                 <div class="items-center justify-between lg:flex">
                     <div class="mb-4 lg:mb-0">
@@ -114,11 +118,9 @@
                         <span class="text-base font-normal text-gray-500 dark:text-gray-400">This is a list of all users</span>
                     </div>
                     <div class="items-center sm:flex">
-                        {{-- <div class="flex items-center">
-                            <a href="{{ route('admin.users.create') }}" wire:navigate class="mb-4 sm:mb-0 mr-4 inline-flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-                                Create user
-                            </a>
-                        </div> --}}
+                        <div class="flex items-center">
+                            @include('admin.users.add-users')
+                        </div>
                     </div>
                 </div>
                 <!-- Table -->
@@ -127,24 +129,24 @@
                         <div class="inline-block min-w-full align-middle">
                             <div class="overflow-hidden shadow sm:rounded-lg">
                                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                                    <thead class="bg-gray-50 dark:bg-gray-700">
+                                    <thead class="bg-gray-200 dark:bg-gray-700">
                                         <tr>
-                                            <th scope="col" class="p-4 text-lg font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                            <th scope="col" class="p-4 text-md font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
                                                 Users
                                             </th>
-                                            <th scope="col" class="p-4 text-lg font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                            <th scope="col" class="p-4 text-md font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
                                                 Role
                                             </th>
-                                            <th scope="col" class="p-4 text-lg font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                            <th scope="col" class="p-4 text-md font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
                                                 Department
                                             </th>
-                                            <th scope="col" class="p-4 text-lg font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                            <th scope="col" class="p-4 text-md font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
                                                 Home address
                                             </th>
-                                            <th scope="col" class="p-4 text-lg font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                            <th scope="col" class="p-4 text-md font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
                                                 Created at
                                             </th>
-                                            <th scope="col" class="p-4 text-lg font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
+                                            <th scope="col" class="p-4 text-md font-medium tracking-wider text-left text-gray-500 uppercase dark:text-white">
                                                 Actions
                                             </th>
                                         </tr>
@@ -152,7 +154,7 @@
                                     <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600">
                                         @foreach($users as $user)
                                             <tr>
-                                                <td class="p-4 text-lg font-normal text-gray-900 whitespace-nowrap dark:text-white">
+                                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-white">
                                                     <div class="flex items-center gap-4">
                                                         @if ($user->profile_picture)
                                                             <img class="w-10 h-10 rounded-full object-cover bg-center" src="{{ asset('storage/' . $user->profile_picture) }}" alt="{{ $user->first_name }}'s photo">
@@ -169,16 +171,16 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="p-4 text-lg font-normal text-gray-900 whitespace-nowrap dark:text-gray-400">
+                                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-gray-400">
                                                     {{ $user->role }}
                                                 </td>
-                                                <td class="p-4 text-lg font-semibold text-gray-900 whitespace-nowrap dark:text-white">
+                                                <td class="p-4 text-sm font-semibold text-gray-900 whitespace-nowrap dark:text-white">
                                                     {{ $user->department }}
                                                 </td>
-                                                <td class="p-4 text-lg font-normal text-gray-900 whitespace-nowrap dark:text-gray-400">
+                                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-gray-400">
                                                     {{ $user->home_address }}
                                                 </td>
-                                                <td class="p-4 text-lg font-normal text-gray-900 whitespace-nowrap dark:text-gray-400">
+                                                <td class="p-4 text-sm font-normal text-gray-900 whitespace-nowrap dark:text-gray-400">
                                                     {{ $user->created_at->format('F j, Y') }}
                                                 </td>
                                                 <td class="flex items-center p-4 whitespace-nowrap">
@@ -212,7 +214,6 @@
                 </div>
               </div>
             </div>
-        </main>
     </div>
-</div>
+</main>
 @endsection
