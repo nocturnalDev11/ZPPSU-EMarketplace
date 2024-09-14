@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::get('/search', [SearchController::class, 'search'])->name('search');
 
-        /*
+    /*
     |--------------------------------------------------------------------------
     | PRODUCT routes
     |--------------------------------------------------------------------------
@@ -68,7 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
     });
 
-        /*
+    /*
     |--------------------------------------------------------------------------
     | SERVICES routes
     |--------------------------------------------------------------------------
@@ -83,7 +83,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
     });
 
-        /*
+    /*
     |--------------------------------------------------------------------------
     | POST routes
     |--------------------------------------------------------------------------
@@ -109,15 +109,22 @@ Route::middleware('auth')->group(function () {
     });
 });
 
-// Admin Routes
+/*
+|--------------------------------------------------------------------------
+| ADMIN routes
+|--------------------------------------------------------------------------
+*/
 Route::prefix('admin')->group(function () {
-    // Guest admin routes (when not logged in)
     Route::middleware('guest.admin')->name('admin.')->group(function () {
         Route::get('login', [AdminController::class, 'showLoginForm'])->name('login');
         Route::post('login', [AdminController::class, 'login']);
     });
 
-    // Authenticated admin routes
+    /*
+    |--------------------------------------------------------------------------
+    | Authenticated admin routes
+    |--------------------------------------------------------------------------
+    */
     Route::middleware('auth:admin')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
         Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');
@@ -127,11 +134,11 @@ Route::prefix('admin')->group(function () {
         | User CRUD routes
         |--------------------------------------------------------------------------
         */
-        Route::get('user/create', [UserManagementController::class, 'store'])->name('create.user');
+        Route::post('user/create', [UserManagementController::class, 'store'])->name('create.user');
         Route::get('user/view/{id}', [UserManagementController::class, 'show'])->name('view.user');
         Route::get('all/users', [UserManagementController::class, 'index'])->name('all.users');
         Route::get('{user}/edit', [UserManagementController::class, 'edit'])->name('edit.user');
-        Route::put('/users/{user}', [UserManagementController::class, 'update'])->name('update.user');
-        Route::delete('users/{user}', [UserManagementController::class, 'destroy'])->name('delete.user');
+        Route::put('/user/{user}', [UserManagementController::class, 'update'])->name('update.user');
+        Route::delete('user/{user}', [UserManagementController::class, 'destroy'])->name('delete.user');
     });
 });
