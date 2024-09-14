@@ -31,8 +31,7 @@ class UserManagementController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+        $request->validate([
             'first_name' => 'required|string|max:255',
             'middle_name' => 'nullable|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -41,15 +40,18 @@ class UserManagementController extends Controller
             'gender' => 'required|string|max:255',
             'role' => 'required|string|max:255',
             'department' => 'required|string|max:255',
-            'university_id' => 'required|string|max:255',
-            'username' => 'required|string|max:255',
+            'university_id' => 'required|string|max:255|unique:users,university_id',
+            'username' => 'required|string|max:255|unique:users,username',
             'contact_number' => 'nullable|string|max:255',
             'email' => 'required|email|max:255|unique:users,email',
             'home_address' => 'nullable|string|max:255',
-            'password' => 'nullable|string|min:8|confirmed',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
-        User::create($validatedData);
+        $user = new User($request->except(['password']));
+        $user->password = bcrypt($request->password);
+
+        $user->save();
 
         return redirect()->route('all.users')->with('success', 'User created successfully!');
     }
@@ -103,7 +105,6 @@ class UserManagementController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'first_name' => 'required|string|max:255',
             'middle_name' => 'nullable|string|max:255',
             'last_name' => 'required|string|max:255',
