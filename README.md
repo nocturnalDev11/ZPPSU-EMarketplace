@@ -1,4 +1,4 @@
-# ZPPSU-E-Marketplace
+# ZPPSU E-Marketplace
 
 The ZPPSU E-Marketplace holds huge significance within the Zamboanga 
 Peninsula Polytechnic State University (ZPPSU) community, offering an extensive 
