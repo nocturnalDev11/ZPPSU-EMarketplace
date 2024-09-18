@@ -29,7 +29,7 @@ Follow these steps to set up the project:
 
 1. **Clone the repository:**
    ```bash
-   https://github.com/phantomDev11/ZPPSU_E-Marketplace.git
+   https://github.com/phantomDev11/ZPPSU_EMarketplace.git
    cd ZPPSU_EMarketplace
    ```
 
