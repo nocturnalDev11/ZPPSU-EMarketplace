@@ -18,7 +18,7 @@
 </head>
 <body class="antialiased">
     <div id="app">
-        <nav class="flex flex-wrap items-center justify-between backdrop-filter backdrop-blur-lg bg-opacity-40 bg-white fixed left-0 right-0 top-0 sm:px-10 px-6 py-1 lg:gap-y-4 gap-y-6 gap-x-4  z-[200] w-full dark:bg-gray-900 dark:backdrop:filter dark:backdrop-blur-4xl dark:bg-opacity-70">
+        <nav class="flex xl:flex-row lg:flex-row md:flex-wrap sm:flex-wrap flex-wrap items-center justify-between backdrop-filter backdrop-blur-lg bg-opacity-40 bg-white fixed left-0 right-0 top-0 sm:px-10 px-6 py-1 xl:gap-y-4 gap-y-2 gap-x-4  z-[200] w-full dark:bg-gray-900 dark:backdrop:filter dark:backdrop-blur-4xl dark:bg-opacity-70">
             <div class="flex">
                 @auth
                     <a href="{{ route('users.home') }}" wire:navigate class="ml-8">
