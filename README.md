@@ -30,7 +30,7 @@ Follow these steps to set up the project:
 1. **Clone the repository:**
    ```bash
    https://github.com/phantomDev11/ZPPSU_E-Marketplace.git
-   cd ZPPSU_E-Marketplace
+   cd ZPPSU_EMarketplace
    ```
 
 2. **Install PHP dependencies:**
