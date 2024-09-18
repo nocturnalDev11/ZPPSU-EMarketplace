@@ -18,7 +18,7 @@
         </div>
 
         <!-- Actions -->
-        <div class="flex flex-col items-stretch justify-end w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
+        <div class="flex items-center justify-center w-full md:w-auto md:flex-row md:space-y-0 xl:gap-0 gap-2 md:items-center md:space-x-3">
             <!-- Add trade -->
             <div x-data="{ modelOpen: false }">
                 <button type="button" @click="modelOpen =!modelOpen"
