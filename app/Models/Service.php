@@ -13,6 +13,7 @@ class Service extends Model
         'user_id',
         'services_picture',
         'services_title',
+        'services_status',
         'services_fee',
         'services_category',
         'services_description',

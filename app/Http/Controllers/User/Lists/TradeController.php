@@ -46,13 +46,13 @@ class TradeController extends Controller
         $trade = Trade::findOrFail($id);
         $user = Auth::user();
         $trades = Trade::where('user_id', $trade->user_id)
-                            ->where('id', '!=', $trade->id)
-                            ->get();
+            ->where('id', '!=', $trade->id)
+            ->get();
         $relatedTrades = Trade::where('trade_category', $trade->trade_category)
-                            ->where('id', '!=', $trade->id)
-                            ->get();
+            ->where('id', '!=', $trade->id)
+            ->get();
 
-        return view('lists.trades.details', compact('trade', 'trades', 'relatedTrades', 'user'));
+        return view('users.lists.trades.details', compact('trade', 'trades', 'relatedTrades', 'user'));
     }
 
     public function destroy($id)
@@ -73,7 +73,7 @@ class TradeController extends Controller
         if (Auth::id() !== $trade->user_id) {
             return redirect()->route('users.home')->with('error', 'You are not authorized to edit this trade list');
         }
-        return view('lists.trades.edit', compact('trade'));
+        return view('users.lists.trades.edit', compact('trade'));
     }
 
     public function update(Request $request, $id)

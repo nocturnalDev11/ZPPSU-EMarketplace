@@ -16,6 +16,7 @@ class ProductController extends Controller
             'prod_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'prod_name' => 'required|string|max:255',
             'prod_price' => 'required|numeric',
+            'prod_status' => 'required|string',
             'prod_category' => 'required|string',
             'prod_condition' => 'required|string',
             'prod_description' => 'required|string|max:65535',
@@ -39,7 +40,7 @@ class ProductController extends Controller
         $products->each(function ($products) {
             $products->created_at = Carbon::parse($products->created_at)->diffForHumans();
         });
-        return view('users.lists.products.index', compact('user','products'));
+        return view('users.lists.products.index', compact('user', 'products'));
     }
 
     public function show($id)
@@ -47,11 +48,11 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $user = Auth::user();
         $products = Product::where('user_id', $product->user_id)
-                            ->where('id', '!=', $product->id)
-                            ->get();
+            ->where('id', '!=', $product->id)
+            ->get();
         $relatedProducts = Product::where('prod_category', $product->prod_category)
-                            ->where('id', '!=', $product->id)
-                            ->get();
+            ->where('id', '!=', $product->id)
+            ->get();
 
         return view('users.lists.products.details', compact('product', 'products', 'user', 'relatedProducts'));
     }
@@ -62,7 +63,7 @@ class ProductController extends Controller
 
         if (Auth::id() === $product->user_id) {
             $product->delete();
-            return redirect()->route('users.lists.products.index')->with('success', 'Product list deleted successfully');
+            return redirect()->route('lists.products.index')->with('success', 'Product list deleted successfully');
         }
 
         return redirect()->route('users.home')->with('error', 'You are not authorized to delete this product list');
@@ -90,6 +91,7 @@ class ProductController extends Controller
             'prod_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'prod_name' => 'required|string|max:255',
             'prod_price' => 'required|numeric',
+            'prod_status' => 'required|string',
             'prod_category' => 'required|string',
             'prod_condition' => 'required|string',
             'prod_description' => 'required|string|max:65535',

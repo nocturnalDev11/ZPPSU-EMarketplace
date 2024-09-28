@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\User;
+use Illuminate\Http\Request;
+use App\Models\UniversityRecord;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -77,8 +78,24 @@ class UserController extends Controller
     {
         $this->validator($request->all())->validate();
 
-        $user = $this->create($request->all());
+        $university_id = $request->input('university_id');
+        $record = UniversityRecord::where('university_id', $university_id)->first();
 
+        if (!$record) {
+            return back()->withErrors([
+                'university_id' => 'The university ID is not valid or you are not part of the ZPPSU community.',
+            ]);
+        }
+
+        $fullName = explode(' ', $record->name);
+        $first_name = $fullName[0] ?? '';
+        $last_name = $fullName[1] ?? '';
+
+        $data = $request->all();
+        $data['first_name'] = $first_name;
+        $data['last_name'] = $last_name;
+
+        $user = $this->create($data);
         Auth::login($user);
 
         return redirect($this->redirectTo);

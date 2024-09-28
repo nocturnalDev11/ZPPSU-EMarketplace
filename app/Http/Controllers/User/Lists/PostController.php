@@ -34,7 +34,7 @@ class PostController extends Controller
     {
         $user = Auth::user();
         $posts = Post::get();
-        $posts->each(function($post) {
+        $posts->each(function ($post) {
             $post->created_at = Carbon::parse($post->created_at)->diffForHumans();
         });
 
@@ -47,11 +47,11 @@ class PostController extends Controller
         $user = Auth::user();
 
         $posts = Post::where('user_id', $post->user_id)
-                     ->where('id', '!=', $post->id)
-                     ->get();
+            ->where('id', '!=', $post->id)
+            ->get();
         $relatedPosts = Post::where('post_list_type', $post->post_list_type)
-                            ->where('id', '!=', $post->id)
-                            ->get();
+            ->where('id', '!=', $post->id)
+            ->get();
 
         return view('users.lists.posts.details', compact('post', 'posts', 'user', 'relatedPosts'));
     }

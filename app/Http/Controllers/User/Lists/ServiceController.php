@@ -15,6 +15,7 @@ class ServiceController extends Controller
         $validatedData = $request->validate([
             'services_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'services_title' => 'required|string|max:255',
+            'services_status' => 'required|string',
             'services_fee' => 'required|numeric',
             'services_category' => 'required|string',
             'services_description' => 'required|string|max:65535',
@@ -47,14 +48,14 @@ class ServiceController extends Controller
         $service = Service::findOrFail($service);
         $user = Auth::user();
         $services = Service::where('user_id', $service->user_id)
-                            ->where('id', '!=', $service->id)
-                            ->get();
+            ->where('id', '!=', $service->id)
+            ->get();
         $relatedServices = Service::where('services_category', $service->services_category)
-                            ->where('user_id', '!=', $user->id)
-                            ->where('id', '!=', $service->id)
-                            ->get();
+            ->where('user_id', '!=', $user->id)
+            ->where('id', '!=', $service->id)
+            ->get();
 
-        return view('lists.services.details', compact('service', 'services', 'user', 'relatedServices'));
+        return view('users.lists.services.details', compact('service', 'services', 'user', 'relatedServices'));
     }
 
     public function destroy($service)
@@ -76,7 +77,7 @@ class ServiceController extends Controller
             return redirect()->route('users.home')->with('error', 'You are not authorized to edit this product list');
         }
 
-        return view('lists.services.edit', compact('service'));
+        return view('users.lists.services.edit', compact('service'));
     }
 
     public function update(Request $request, $service)
@@ -90,6 +91,7 @@ class ServiceController extends Controller
         $validatedData = $request->validate([
             'services_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'services_title' => 'required|string|max:255',
+            'services_status' => 'required|string',
             'services_fee' => 'required|numeric',
             'services_category' => 'required|string',
             'services_description' => 'required|string|max:65535',

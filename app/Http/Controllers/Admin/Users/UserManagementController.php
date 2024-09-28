@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Users;
 
 use App\Http\Controllers\Controller;
+use App\Models\UniversityRecord;
 use Illuminate\Http\Request;
 use App\Models\User;
 

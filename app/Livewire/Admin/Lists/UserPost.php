@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Livewire\Lists\Posts;
+namespace App\Livewire\Admin\Lists;
 
 use App\Models\Post;
 use Livewire\Component;
 
-class PostList extends Component
+class UserPost extends Component
 {
     public $search = '';
     public $sortBy = 'latest';
@@ -31,7 +31,7 @@ class PostList extends Component
 
         $posts = $query->get();
 
-        return view('livewire.lists.posts.post-list', [
+        return view('livewire.admin.lists.user-post', [
             'posts' => $posts,
         ]);
     }
