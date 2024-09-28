@@ -12,7 +12,11 @@ use App\Http\Controllers\User\Lists\TradeController;
 use App\Http\Controllers\User\Lists\SearchController;
 use App\Http\Controllers\User\Lists\ProductController;
 use App\Http\Controllers\User\Lists\ServiceController;
+use App\Http\Controllers\Admin\Lists\PostControllerManagement;
 use App\Http\Controllers\Admin\Users\UserManagementController;
+use App\Http\Controllers\Admin\Lists\TradeControllerManagement;
+use App\Http\Controllers\Admin\Lists\ProductControllerManagement;
+use App\Http\Controllers\Admin\Lists\ServiceControllerManagement;
 
 // Public route for welcome page
 Route::get('/', function () {
@@ -51,6 +55,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/{user}', [MessagesController::class, 'conversation'])->name('messages.conversation');
         Route::post('/store', [MessagesController::class, 'store'])->name('messages.store');
         Route::delete('/{message}', [MessagesController::class, 'destroy'])->name('messages.destroy');
+        Route::post('/messages/createPlan', [MessagesController::class, 'createPlan'])->name('messages.createPlan');
     });
     Route::get('/search', [SearchController::class, 'search'])->name('search');
 
@@ -98,6 +103,11 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
     });
 
+    /*
+    |--------------------------------------------------------------------------
+    | TRADING routes
+    |--------------------------------------------------------------------------
+    */
     Route::prefix('trades')->group(function () {
         Route::get('/details/{id}', [TradeController::class, 'show'])->name('trades.details');
         Route::get('/', [TradeController::class, 'index'])->name('lists.trades.index');
@@ -140,5 +150,22 @@ Route::prefix('admin')->group(function () {
         Route::get('{user}/edit', [UserManagementController::class, 'edit'])->name('edit.user');
         Route::put('/user/{user}', [UserManagementController::class, 'update'])->name('update.user');
         Route::delete('user/{user}', [UserManagementController::class, 'destroy'])->name('delete.user');
+
+        Route::prefix('products')->group(function () {
+            Route::get('/', [ProductControllerManagement::class, 'index'])->name('products');
+            Route::delete('/{product}', [ProductControllerManagement::class, 'destroy'])->name('delete.products');
+        });
+
+        Route::prefix('services')->group(function () {
+            Route::get('/', [ServiceControllerManagement::class, 'index'])->name('services');
+        });
+
+        Route::prefix('posts')->group(function () {
+            Route::get('/', [PostControllerManagement::class, 'index'])->name('posts');
+        });
+
+        Route::prefix('trades')->group(function () {
+            Route::get('/', [TradeControllerManagement::class, 'index'])->name('trades');
+        });
     });
 });
