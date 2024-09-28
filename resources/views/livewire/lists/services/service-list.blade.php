@@ -13,7 +13,7 @@
                 <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
             </svg>
             </div>
-            <input type="search" wire:model.live="search" placeholder="Search" autocomplete="off" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
+            <input type="search" wire:model.live="search" placeholder="Search" autocomplete="off" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-800 dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-400 dark:focus:border-purple-400" required="">
         </div>
 
         <!-- Actions -->
@@ -21,7 +21,7 @@
             <!-- Add service -->
             <div x-data="{ modelOpen: false }">
                 <button type="button" @click="modelOpen =!modelOpen"
-                    class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-purple-700 hover:bg-primary-800">
+                    class="flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-purple-700 hover:bg-purple-800 dark:bg-purple-500 dark:hover:bg-purple-600">
                     <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
                     </svg>
@@ -148,7 +148,7 @@
             <!-- Sort by -->
             <div @click.away="openSort = false" class="relative">
                 <button @click="openSort = !openSort"
-                    class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
+                    class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:text-white dark:bg-gray-800 dark:border-none">
                     Sort by
                     <svg class="ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                         <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
@@ -169,7 +169,7 @@
             <!-- Filter -->
             <div @click.away="openFilter = false" class="relative">
                 <button @click="openFilter = !openFilter"
-                    class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
+                    class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:text-white dark:bg-gray-800 dark:border-none">
                     Filter
                     <svg class="ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                         <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
@@ -196,7 +196,7 @@
         </div>
     </div>
 
-    <!-- Product List -->
+    <!-- Service List -->
     <div class="flex flex-wrap -mx-3">
         @forelse ($services as $service)
             <div class="w-full max-w-full px-3 mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
@@ -239,7 +239,7 @@
             </div>
         @empty
             <div class="flex items-center justify-center w-full">
-                <p class="text-lg text-gray-700">No services found.</p>
+                <p class="text-lg text-gray-700 dark:text-gray-300">No services found.</p>
             </div>
         @endforelse
     </div>

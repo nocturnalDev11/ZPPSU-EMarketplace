@@ -7,7 +7,7 @@
             <nav class="flex mb-5" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
-                        <a href="{{ route('users.home') }}" class="inline-flex items-center text-md font-medium text-gray-700 hover:text-maroon">
+                        <a href="{{ route('users.home') }}" wire:navigate class="inline-flex items-center text-md font-medium text-gray-700 hover:text-maroon">
                             <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
                             </svg>
@@ -57,15 +57,27 @@
                         <label for="prod_price" class="block mb-2 text-sm font-medium text-gray-900">Product price</label>
                         <input type="number" name="prod_price" id="prod_price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" value="{{ old('prod_price', $product->prod_price) }}" placeholder="₱299" required="">
                     </div>
+                    <div>
+                        <label for="prod_status" class="block mb-2 text-sm font-medium text-gray-900">Status</label>
+                        <select id="prod_status" name="prod_status"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+                            <option value="Available" {{ $product->prod_status == 'Available' ? 'selected' : '' }}>Available</option>
+                            <option value="Out of Stock" {{ $product->prod_status == 'Out of Stock' ? 'selected' : '' }}>Out of Stock</option>
+                            <option value="Pre-Order" {{ $product->prod_status == 'Pre-Order' ? 'selected' : '' }}>Pre-Order</option>
+                            <option value="Backordered" {{ $product->prod_status == 'Backordered' ? 'selected' : '' }}>Backordered</option>
+                            <option value="Discontinued" {{ $product->prod_status == 'Discontinued' ? 'selected' : ''}}>Discontinued</option>
+                            <option value="Closed" {{ $product->prod_status == 'Closed' ? 'selected' : ''}}>Closed</option>
+                        </select>
+                    </div>
                     <!-- Product category -->
                     <div>
                         <label for="prod_category" class="block mb-2 text-sm font-medium text-gray-900">Category</label>
                         <select id="prod_category" name="prod_category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
-                        <option value="Apparel" {{ $product->prod_category == 'Apparel' ? 'selected' : '' }}>Apparel</option>
-                        <option value="School supplies" {{ $product->prod_category == 'School supplies' ? 'selected' : '' }}>School Supplies</option>
-                        <option value="Stationery" {{ $product->prod_category == 'Stationery' ? 'selected' : '' }}>Stationery</option>
-                        <option value="Electronics" {{ $product->prod_category == 'Electronics' ? 'selected' : '' }}>Electronics</option>
-                        <option value="University merchandise" {{ $product->prod_category == 'University merchandise' ? 'selected' : '' }}>University Merchandise</option>
+                            <option value="Apparel" {{ $product->prod_category == 'Apparel' ? 'selected' : '' }}>Apparel</option>
+                            <option value="School supplies" {{ $product->prod_category == 'School supplies' ? 'selected' : '' }}>School Supplies</option>
+                            <option value="Stationery" {{ $product->prod_category == 'Stationery' ? 'selected' : '' }}>Stationery</option>
+                            <option value="Electronics" {{ $product->prod_category == 'Electronics' ? 'selected' : '' }}>Electronics</option>
+                            <option value="University merchandise" {{ $product->prod_category == 'University merchandise' ? 'selected' : '' }}>University Merchandise</option>
                         </select>
                     </div>
                     <!-- Product condition -->

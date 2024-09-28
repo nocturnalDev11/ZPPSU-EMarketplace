@@ -82,11 +82,22 @@
                         </div>
 
                         <div class="col-span-2 sm:col-span-1">
+                            <label for="services_status" class="block text-sm text-gray-700 dark:text-gray-200">Status</label>
+                            <select id="services_status" name="services_status"
+                                class="block w-full px-3 py-2 mt-2 text-gray-600 dark:text-gray-200 placeholder-gray-400 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                <option value="" selected>Select status</option>
+                                <option value="Available">Available</option>
+                                <option value="Discontinued">Discontinued</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+                        </div>
+
+                        <div class="col-span-2 sm:col-span-1">
                             <label for="services_fee" class="block text-sm text-gray-700 dark:text-gray-200">Service fee</label>
                             <input id="services_fee" name="services_fee" type="number" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                         </div>
 
-                        <div class="col-span-2 sm:col-span-1">
+                        <div class="col-span-2">
                             <label for="services_category" class="block text-sm text-gray-700 dark:text-gray-200">Category</label>
                             <select id="services_category" name="services_category" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                 <option value="" selected>Select category</option>
@@ -117,7 +128,6 @@
                         </button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>

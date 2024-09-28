@@ -21,7 +21,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    <div id="app"class="bg-gray-50 dark:bg-gray-900">
+    <div id="app" class="bg-gray-50 dark:bg-gray-900">
         <nav class="backdrop-filter backdrop-blur-lg bg-opacity-40 bg-white border-b border-gray-200 fixed left-0 right-0 top-0 z-50 dark:bg-gray-900 dark:backdrop:filter dark:backdrop-blur-lg dark:bg-opacity-40 dark:border-none">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
                 <a class="flex items-center p-3 rounded-md space-x-3 rtl:space-x-reverse hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-300 dark:hover:bg-gray-700 dark:focus:ring-gray-600">

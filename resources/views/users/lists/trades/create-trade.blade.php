@@ -110,6 +110,7 @@
                         <div class="col-span-2 sm:col-span-1">
                             <label for="trade_status" class="block text-sm text-gray-700">Status</label>
                             <select id="trade_status" name="trade_status" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                <option value="" selected>Select status</option>
                                 <option value="Available">Available</option>
                                 <option value="Pending">Pending</option>
                                 <option value="In-Progress">In Progress</option>

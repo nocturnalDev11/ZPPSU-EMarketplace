@@ -39,14 +39,14 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="flex w-full gap-2">
+                        {{-- <div class="flex w-full gap-2">
                             <div class="w-full">
                                 @include('users.messages.create-plan-modal')
                             </div>
                             <button type="button" class="w-full text-gray-600 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
                                 More options
                             </button>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <!-- Messages -->
@@ -85,12 +85,12 @@
                                                 <div class="flex items-start gap-2.5">
                                                     <div class="flex flex-col w-full max-w-[320px] leading-1.5">
                                                         <p class="text-sm font-normal pb-2.5 text-gray-900 dark:text-white">
-                                                            <a href="{{ $message->content_link }}" class="text-blue-700 dark:text-blue-500 underline hover:no-underline font-medium break-all">
+                                                            <a href="{{ $message->content_link }}" wire:navigate class="text-blue-700 dark:text-blue-500 underline hover:no-underline font-medium break-all">
                                                                 {{ $message->content_link }}
                                                             </a>
                                                         </p>
                                                         @if($message->content_link_image)
-                                                            <a href="{{ $message->content_link }}" class="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 mb-2 hover:bg-gray-300 dark:hover:bg-gray-500">
+                                                            <a href="{{ $message->content_link }}" wire:navigate class="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 mb-2 hover:bg-gray-300 dark:hover:bg-gray-500">
                                                                 <img src="{{ asset('storage/'.$message->content_link_image) }}" alt="Content Image" class="rounded-lg mb-2" />
                                                                 @if($message->content_link_description)
                                                                     <span class="text-sm font-medium text-gray-900 dark:text-white mb-2">
@@ -170,12 +170,12 @@
                                                     <div class="flex items-start gap-2.5">
                                                         <div class="flex flex-col w-full max-w-[320px] leading-1.5">
                                                             <p class="text-sm font-normal pb-2.5 text-gray-900 dark:text-white">
-                                                                <a href="{{ $message->content_link }}" class="text-blue-700 dark:text-blue-500 underline hover:no-underline font-medium break-all">
+                                                                <a href="{{ $message->content_link }}" wire:navigate class="text-blue-700 dark:text-blue-500 underline hover:no-underline font-medium break-all">
                                                                     {{ $message->content_link }}
                                                                 </a>
                                                             </p>
                                                             @if($message->content_link_image)
-                                                                <a href="{{ $message->content_link }}" class="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 mb-2 hover:bg-gray-300 dark:hover:bg-gray-500">
+                                                                <a href="{{ $message->content_link }}" wire:navigate class="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 mb-2 hover:bg-gray-300 dark:hover:bg-gray-500">
                                                                     <img src="{{ asset('storage/'.$message->content_link_image) }}" alt="Content Image" class="rounded-lg mb-2" />
                                                                     @if($message->content_link_description)
                                                                         <span class="text-sm font-medium text-gray-900 dark:text-white mb-2">
@@ -184,7 +184,7 @@
                                                                     @endif
                                                                 </a>
                                                             @elseif($message->content_link_description)
-                                                                <a href="{{ $message->content_link }}" class="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 mb-2 hover:bg-gray-300 dark:hover:bg-gray-500">
+                                                                <a href="{{ $message->content_link }}" wire:navigate class="bg-gray-100 dark:bg-gray-800 rounded-xl p-4 mb-2 hover:bg-gray-300 dark:hover:bg-gray-500">
                                                                     <span class="text-sm font-medium text-gray-900 dark:text-white mb-2">
                                                                         {{ $message->content_link_description }}
                                                                     </span>
@@ -244,62 +244,62 @@
         </div>
     </div>
     <script>
-            const fileInput = document.getElementById('fileInput');
-    const preview = document.getElementById('preview');
+        const fileInput = document.getElementById('fileInput');
+        const preview = document.getElementById('preview');
 
-    if (fileInput) {
-        fileInput.addEventListener('change', (event) => {
-            const files = Array.from(event.target.files);
-            preview.innerHTML = ''; // Clear the preview area
+        if (fileInput) {
+            fileInput.addEventListener('change', (event) => {
+                const files = Array.from(event.target.files);
+                preview.innerHTML = '';
 
-            files.forEach((file) => {
-                const fileReader = new FileReader();
-                fileReader.readAsDataURL(file);
+                files.forEach((file) => {
+                    const fileReader = new FileReader();
+                    fileReader.readAsDataURL(file);
 
-                fileReader.onload = (e) => {
-                    const url = e.target.result;
-                    const size = file.size > 1024 ? (file.size > 1048576 ? Math.round(file.size / 1048576) + 'mb' : Math.round(file.size / 1024) + 'kb') : file.size + 'b';
-                    const previewType = ['jpg', 'jpeg', 'png', 'gif'].includes(file.name.split('.').pop().toLowerCase());
+                    fileReader.onload = (e) => {
+                        const url = e.target.result;
+                        const size = file.size > 1024 ? (file.size > 1048576 ? Math.round(file.size / 1048576) + 'mb' : Math.round(file.size / 1024) + 'kb') : file.size + 'b';
+                        const previewType = ['jpg', 'jpeg', 'png', 'gif'].includes(file.name.split('.').pop().toLowerCase());
 
-                    const div = document.createElement('div');
-                    div.classList.add('relative', 'w-32', 'h-32', 'object-cover', 'rounded', 'mb-2');
+                        const div = document.createElement('div');
+                        div.classList.add('relative', 'w-32', 'h-32', 'object-cover', 'rounded', 'mb-2');
 
-                    if (previewType) {
-                        div.innerHTML = `
-                            <img src="${url}" class="w-32 h-32 object-cover rounded">
-                            <button class="remove-btn w-6 h-6 absolute text-center flex items-center top-0 right-0 m-2 text-white text-lg bg-red-500 hover:bg-red-500 rounded-full">
-                                <span class="mx-auto my-auto">
-                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
-                                    </svg>
-                                </span>
-                            </button>
-                            <div class="text-xs text-center pb-3">${size}</div>
-                        `;
-                    } else {
-                        div.innerHTML = `
-                            <svg class="fill-current w-32 h-32 ml-auto pt-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                <path d="M15 2v5h5v15h-16v-20h11zm1-2h-14v24h20v-18l-6-6z" />
-                            </svg>
-                            <button class="remove-btn w-6 h-6 absolute text-center flex items-center top-0 right-0 m-2 text-white text-lg bg-red-500 hover:bg-red-500 rounded-full">
-                                <span class="mx-auto my-auto">
-                                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
-                                    </svg>
-                                </span>
-                            </button>
-                            <div class="text-xs pb-3 text-center">${size}</div>
-                        `;
-                    }
+                        if (previewType) {
+                            div.innerHTML = `
+                                <img src="${url}" class="w-32 h-32 object-cover rounded">
+                                <button class="remove-btn w-6 h-6 absolute text-center flex items-center top-0 right-0 m-2 text-white text-lg bg-red-500 hover:bg-red-500 rounded-full">
+                                    <span class="mx-auto my-auto">
+                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                                        </svg>
+                                    </span>
+                                </button>
+                                <div class="text-xs text-center pb-3">${size}</div>
+                            `;
+                        } else {
+                            div.innerHTML = `
+                                <svg class="fill-current w-32 h-32 ml-auto pt-1" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path d="M15 2v5h5v15h-16v-20h11zm1-2h-14v24h20v-18l-6-6z" />
+                                </svg>
+                                <button class="remove-btn w-6 h-6 absolute text-center flex items-center top-0 right-0 m-2 text-white text-lg bg-red-500 hover:bg-red-500 rounded-full">
+                                    <span class="mx-auto my-auto">
+                                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                                        </svg>
+                                    </span>
+                                </button>
+                                <div class="text-xs pb-3 text-center">${size}</div>
+                            `;
+                        }
 
-                    preview.appendChild(div);
+                        preview.appendChild(div);
 
-                    div.querySelector('.remove-btn').addEventListener('click', () => {
-                        div.remove();
-                    });
-                };
+                        div.querySelector('.remove-btn').addEventListener('click', () => {
+                            div.remove();
+                        });
+                    };
+                });
             });
-        });
-    }
+        }
     </script>
 @endsection

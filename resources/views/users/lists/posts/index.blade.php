@@ -1,7 +1,7 @@
 @extends('users.layouts.nav')
 
 @section('content')
-<main class="container xl:ml-80 lg:ml-80 md:ml-0 ml-0 mx-auto h-screen pt-20 px-10 dark:bg-gray-900">
+<main class="container xl:ml-80 lg:ml-80 md:w-full w-full mx-auto h-screen pt-20 px-10 dark:bg-gray-900">
         <!-- Breadcrumb -->
         <nav class="flex mb-5" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">

@@ -1,7 +1,7 @@
 @extends('admin.layouts.nav')
 
 @section('content')
-<div id="main-content" class="flex overflow-hidden bg-gray-50 dark:bg-gray-900 transition-all ml-80 h-full">
+<div class="flex overflow-hidden dark:bg-gray-900 transition-all h-full">
     <div class="relative w-full overflow-y-auto pt-16">
         <main>
             <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-6">

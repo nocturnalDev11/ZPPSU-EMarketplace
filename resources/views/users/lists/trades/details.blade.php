@@ -1,7 +1,7 @@
 @extends('users.layouts.nav')
 
 @section('content')
-    <div class="container h-full xl:ml-80 lg:ml-80 md:ml-0 ml-0 p-4 pt-20">
+    <div class="container h-full xl:ml-80 lg:ml-80 md:w-full w-full p-4 pt-20">
         <nav class="flex mb-5" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
@@ -104,24 +104,20 @@
                             </div>
                         @endif
                         @if(Auth::id() === $trade->user->id)
-                                <div class="flex gap-2">
-                                    <a href="{{ route('trades.edit', $trade->id) }}" wire:navigate type="button" class="w-[200px] px-3 py-2 text-xs font-medium text-center inline-flex items-center justify-center text-gray-700 dark:text-white bg-gray-200 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-0 dark:bg-gray-600 dark:hover:bg-gray-700">
-                                        <svg class="w-3 h-3 text-gray-700 dark:text-white me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M7.24264 17.9967H3V13.754L14.435 2.319C14.8256 1.92848 15.4587 1.92848 15.8492 2.319L18.6777 5.14743C19.0682 5.53795 19.0682 6.17112 18.6777 6.56164L7.24264 17.9967ZM3 19.9967H21V21.9967H3V19.9967Z"></path>
-                                        </svg>
-                                        Edit trading
-                                    </a>
-                                    <button data-modal-target="delete-trade-modal" data-modal-toggle="delete-trade-modal" type="button" class="w-[200px] px-3 py-2 text-xs font-medium text-center inline-flex items-center justify-center text-gray-700 dark:text-white bg-gray-200 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-0 dark:bg-gray-600 dark:hover:bg-gray-700">
-                                        <svg class="w-3 h-3 text-gray-700 dark:text-white me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M7 6V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7ZM9 4V6H15V4H9Z"></path>
-                                        </svg>
-                                        Delete trading
-                                    </button>
-                                </div>
+                            <div class="flex gap-2">
+                                <a href="{{ route('trades.edit', $trade->id) }}" wire:navigate type="button" class="w-[200px] px-3 py-2 text-xs font-medium text-center inline-flex items-center justify-center text-gray-700 dark:text-white bg-gray-200 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-0 dark:bg-gray-600 dark:hover:bg-gray-700">
+                                    <svg class="w-3 h-3 text-gray-700 dark:text-white me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M7.24264 17.9967H3V13.754L14.435 2.319C14.8256 1.92848 15.4587 1.92848 15.8492 2.319L18.6777 5.14743C19.0682 5.53795 19.0682 6.17112 18.6777 6.56164L7.24264 17.9967ZM3 19.9967H21V21.9967H3V19.9967Z"></path>
+                                    </svg>
+                                    Edit trading
+                                </a>
+                                @include('users.lists.trades.delete-trade')
+                            </div>
                         @endif
                     </div>
                     @if(Auth::check() && Auth::id() !== $trade->user->id)
                         <form action="{{ route('messages.store') }}" method="POST" enctype="multipart/form-data" class="xl:w-4/5 lg:w-4/5 md:w-full w-full">
+                            @csrf
                             <span>Send message to {{ $trade->user->first_name }}</span>
                             <input type="hidden" name="recipient_id" value="{{ $trade->user->id }}">
                             <input type="hidden" name="content_link" value="{{ route('trades.show', $trade->id) }}">

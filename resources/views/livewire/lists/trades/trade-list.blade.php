@@ -10,11 +10,11 @@
         <!-- Search -->
         <div class="relative w-full md:w-1/2">
             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-            </svg>
+                <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                </svg>
             </div>
-            <input type="search" wire:model.live="search" placeholder="Search" autocomplete="off" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
+            <input type="search" wire:model.live="search" placeholder="Search" autocomplete="off" class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-800 dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-purple-400 dark:focus:border-purple-400" required="">
         </div>
 
         <!-- Actions -->
@@ -207,20 +207,23 @@
 
             <!-- Sort by -->
             <div @click.away="openSort = false" class="relative">
-                <button @click="openSort = !openSort"
-                    class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
+                <button
+                    @click="openSort = !openSort"
+                    class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:text-white dark:bg-gray-800 dark:border-none">
                     Sort by
                     <svg class="ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                         <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
                     </svg>
                 </button>
-                <div x-show="openSort" class="absolute mt-2 w-44 bg-white shadow rounded z-10">
-                    <button wire:click="setSort('latest')"
-                        class="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100">
+                <div x-show="openSort" class="absolute mt-2 w-44 bg-white dark:bg-gray-800 dark:text-gray-200 shadow rounded z-10">
+                    <button
+                        wire:click="setSort('latest')"
+                        class="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100 dark:hover:bg-gray-700">
                         Latest
                     </button>
-                    <button wire:click="setSort('oldest')"
-                        class="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100">
+                    <button
+                        wire:click="setSort('oldest')"
+                        class="block w-full px-4 py-2 text-sm text-left hover:bg-gray-100 dark:hover:bg-gray-700">
                         Oldest
                     </button>
                 </div>
@@ -228,15 +231,20 @@
 
             <!-- Filter -->
             <div @click.away="openFilter = false" class="relative">
-                <button @click="openFilter = !openFilter"
-                    class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
+                <button
+                    @click="openFilter = !openFilter"
+                    class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:text-white dark:bg-gray-800 dark:border-none">
                     Filter by category
                     <svg class="ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                         <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
                     </svg>
                 </button>
-                <div x-show="openFilter" class="absolute mt-2 w-48 p-3 bg-white shadow rounded z-10">
-                    <h6 class="mb-3 text-sm font-medium text-gray-900">
+                <div
+                    x-show="openFilter"
+                    class="absolute mt-2 w-48 p-3 bg-white dark:bg-gray-800 shadow rounded z-10"
+                >
+                    <h6
+                        class="mb-3 text-sm font-medium text-gray-900 dark:text-gray-200">
                         Category
                     </h6>
                     <ul class="space-y-2 text-sm">
@@ -244,8 +252,8 @@
                         <li class="flex items-center">
                             <input type="checkbox" wire:model.live="selectedCategories"
                                 value="{{ $category }}"
-                                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500">
-                            <label for="{{ $category }}" class="ml-2 text-sm font-medium text-gray-900">
+                                class="w-4 h-4 bg-gray-100 dark:bg-gray-600 border-gray-300 dark:border-gray-500 rounded text-purple-600 dark:text-gray-200 focus:ring-purple-500">
+                            <label for="{{ $category }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">
                                 {{ $category }}
                             </label>
                         </li>
@@ -257,14 +265,14 @@
             <!-- Status -->
             <div @click.away="openStatus = false" class="relative">
                 <button @click="openStatus = !openStatus"
-                    class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
+                    class="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:text-white dark:bg-gray-800 dark:border-none">
                     Filter by status
                     <svg class="ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                         <path clip-rule="evenodd" fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
                     </svg>
                 </button>
-                <div x-show="openStatus" class="absolute mt-2 w-48 p-3 bg-white shadow rounded z-10">
-                    <h6 class="mb-3 text-sm font-medium text-gray-900">
+                <div x-show="openStatus" class="absolute mt-2 w-48 p-3 bg-white dark:bg-gray-800 shadow rounded z-10">
+                    <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-gray-200">
                         Status
                     </h6>
                     <ul class="space-y-2 text-sm">
@@ -272,8 +280,8 @@
                             <li class="flex items-center">
                                 <input type="checkbox" wire:model.live="selectedStatus"
                                     value="{{ $status }}"
-                                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500">
-                                <label for="{{ $status }}" class="ml-2 text-sm font-medium text-gray-900">
+                                    class="w-4 h-4 bg-gray-100 dark:bg-gray-600 border-gray-300 dark:border-gray-500 rounded text-purple-600 dark:text-gray-200 focus:ring-purple-500">
+                                <label for="{{ $status }}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">
                                     {{ $status }}
                                 </label>
                             </li>

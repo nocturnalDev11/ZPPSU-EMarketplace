@@ -6,7 +6,7 @@
         <span class="absolute block mb-px text-sm font-medium -translate-y-1/2 -start-14 top-1/2">Product</span>
     </button>
 
-    <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div x-show="modelOpen" class="fixed inset-0 z-[700] overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0">
             <div x-cloak @click="modelOpen = false" x-show="modelOpen"
                 x-transition:enter="transition ease-out duration-300 transform"
@@ -15,7 +15,7 @@
                 x-transition:leave="transition ease-in duration-200 transform"
                 x-transition:leave-start="opacity-100"
                 x-transition:leave-end="opacity-0"
-                class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-40" aria-hidden="true"
+                class="fixed inset-0 transition-opacity bg-gray-500 z-100 bg-opacity-40 backdrop:filter backdrop-blur-md dark:bg-gray-700 dark:bg-opacity-60 dark:backdrop:filter dark:backdrop-blur-md" aria-hidden="true"
             ></div>
 
             <div x-cloak x-show="modelOpen"
@@ -25,10 +25,10 @@
                 x-transition:leave="transition ease-in duration-200 transform"
                 x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                class="inline-block w-full max-w-xl p-8 my-auto sm:my-24 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl"
+                class="inline-block w-full max-w-xl p-8 my-auto sm:my-24 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl dark:bg-gray-800 dark:backdrop:filter dark:backdrop-blur-lg dark:bg-opacity-90"
             >
                 <div class="flex items-center justify-between space-x-4">
-                    <h1 class="text-xl font-medium text-gray-800 ">Create a product</h1>
+                    <h1 class="text-xl font-medium text-gray-800 dark:text-white">Create a product</h1>
 
                     <button @click="modelOpen = false" class="text-gray-600 focus:outline-none hover:text-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -50,7 +50,7 @@
                             reader.readAsDataURL($refs.photo.files[0]);
                         ">
 
-                        <label class="block text-gray-700 text-sm font-bold mb-2 text-center" for="photo">
+                        <label class="block text-gray-700 text-sm font-bold mb-2 text-center dark:text-white" for="photo">
                             Product picture
                             <span class="text-red-600"></span>
                         </label>
@@ -69,7 +69,7 @@
                                 <span class="block w-80 h-80 rounded-md m-auto shadow bg-center bg-cover" x-bind:style="'background-image: url(\'' + photoPreview + '\');'">
                                 </span>
                             </div>
-                            <button type="button" class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-400 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mt-2 ml-3" x-on:click.prevent="$refs.photo.click()">
+                            <button type="button" class="inline-flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md font-semibold text-xs text-gray-700 dark:text-gray-200 uppercase tracking-widest shadow-sm hover:text-gray-500 focus:outline-none focus:border-purple-400 focus:shadow-outline-purple active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150 mt-2 ml-3" x-on:click.prevent="$refs.photo.click()">
                                 Upload photo
                             </button>
                         </div>
@@ -78,17 +78,29 @@
                     <div class="grid gap-2 mb-4 grid-cols-2">
                         <div class="col-span-2">
                             <label for="prod_name" class="block text-sm text-gray-700 dark:text-gray-200">Product name</label>
-                            <input id="prod_name" name="prod_name" placeholder="ex. bag" type="text" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                            <input id="prod_name" name="prod_name" placeholder="ex. bag" type="text" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                         </div>
 
-                        <div class="col-span-2">
+                        <div class="col-span-2 sm:col-span-1">
                             <label for="prod_price" class="block text-sm text-gray-700 dark:text-gray-200">Price</label>
-                            <input id="prod_price" name="prod_price" type="number" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                            <input id="prod_price" name="prod_price" type="number" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border dark:bg-gray-700 border-gray-200 dark:border-gray-600 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                        </div>
+
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="prod_status" class="block text-sm text-gray-700 dark:text-gray-200">Status</label>
+                            <select id="prod_status"
+                                name="prod_status"
+                                class="block w-full px-3 py-2 mt-2 text-gray-600 dark:text-gray-200 placeholder-gray-400 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                                <option value="" selected>Select status</option>
+                                <option value="Available">Available</option>
+                                <option value="Out of Stock">Out of Stock</option>
+                                <option value="Closed">Closed</option>
+                            </select>
                         </div>
 
                         <div class="col-span-2 sm:col-span-1">
                             <label for="prod_category" class="block text-sm text-gray-700 dark:text-gray-200">Category</label>
-                            <select id="prod_category" name="prod_category" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                            <select id="prod_category" name="prod_category" class="block w-full px-3 py-2 mt-2 text-gray-600 dark:text-gray-200 placeholder-gray-400 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                 <option value="" selected>Select category</option>
                                 <option value="Apparel">Apparel</option>
                                 <option value="School supplies">School Supplies</option>
@@ -103,7 +115,7 @@
 
                         <div class="col-span-2 sm:col-span-1">
                             <label for="prod_condition" class="block text-sm text-gray-700 dark:text-gray-200">Condition</label>
-                            <select id="prod_condition" name="prod_condition" class="block w-full px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
+                            <select id="prod_condition" name="prod_condition" class="block w-full px-3 py-2 mt-2 text-gray-600 dark:text-gray-200 placeholder-gray-400 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40">
                                 <option value="" selected>Select condition</option>
                                 <option value="New">New</option>
                                 <option value="Used - like new">Used - Like new</option>
@@ -114,12 +126,12 @@
 
                         <div class="col-span-2">
                             <label for="prod_description" class="block text-sm text-gray-700 dark:text-gray-200">Description</label>
-                            <textarea id="prod_description" name="prod_description" type="text" class="scroll-on w-full resize-none block px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white border border-gray-200 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40" rows="4"></textarea>
+                            <textarea id="prod_description" name="prod_description" type="text" class="scroll-on w-full resize-none block px-3 py-2 mt-2 text-gray-600 placeholder-gray-400 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md focus:border-indigo-400 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40" rows="4"></textarea>
                         </div>
                     </div>
 
                     <div class="flex justify-end mt-6">
-                        <button type="submit" class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:ring-none">
+                        <button type="submit" class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-700 rounded-md dark:bg-indigo-500 dark:hover:bg-indigo-600 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:ring-none">
                             Add product
                         </button>
                     </div>

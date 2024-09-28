@@ -1,7 +1,7 @@
 @extends('users.layouts.nav')
 
 @section('content')
-    <div class="container h-full xl:ml-80 lg:ml-80 md:ml-0 ml-0 p-4 pt-20">
+    <div class="container h-full xl:ml-80 lg:ml-80 md:w-full w-full p-4 pt-20">
         <nav class="flex mb-5" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
@@ -95,12 +95,7 @@
                                     </svg>
                                     Edit service
                                 </a>
-                                <button data-modal-target="delete-service-modal" data-modal-toggle="delete-service-modal" type="button" class="w-[200px] px-3 py-2 text-xs font-medium text-center inline-flex items-center justify-center text-gray-700 dark:text-white bg-gray-200 rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-0 dark:bg-gray-600 dark:hover:bg-gray-700">
-                                    <svg class="w-3 h-3 text-gray-700 dark:text-white me-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M7 6V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7ZM9 4V6H15V4H9Z"></path>
-                                    </svg>
-                                    Delete service
-                                </button>
+                                @include('users.lists.services.delete-service')
                             </div>
                         </div>
                         @endif
