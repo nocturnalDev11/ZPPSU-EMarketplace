@@ -48,28 +48,6 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
-
-        Schema::create('skills', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
-        });
-
-        Schema::create('skill_user', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('skill_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
-        });
-
-        Schema::create('follower_user', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('follower_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('followed_id')->constrained('users')->onDelete('cascade');
-            $table->timestamps();
-
-            $table->unique(['follower_id', 'followed_id']);
-        });
     }
 
     /**
@@ -77,9 +55,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('follower_user');
-        Schema::dropIfExists('skill_user');
-        Schema::dropIfExists('skills');
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');

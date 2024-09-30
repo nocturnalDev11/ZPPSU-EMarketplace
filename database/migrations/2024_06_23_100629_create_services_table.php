@@ -23,15 +23,6 @@ return new class extends Migration
             $table->timestamp('edited_at')->nullable();
             $table->timestamps();
         });
-
-        Schema::create('services_comments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('services_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->longText('comment_content');
-            $table->foreignId('parent_id')->nullable()->constrained('services_comments')->onDelete('cascade');
-            $table->timestamps();
-        });
     }
 
     /**
@@ -40,6 +31,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('services');
-        Schema::dropIfExists('services_comments');
     }
 };

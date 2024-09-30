@@ -24,15 +24,6 @@ return new class extends Migration
             $table->timestamp('edited_at')->nullable();
             $table->timestamps();
         });
-
-        Schema::create('prod_comments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('prod_id')->constrained('products')->onDelete('cascade'); // Ensure this matches
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->longText('comment_content');
-            $table->foreignId('parent_id')->nullable()->constrained('prod_comments')->onDelete('cascade');
-            $table->timestamps();
-        });
     }
 
     /**
@@ -40,7 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('prod_comments');
         Schema::dropIfExists('products');
     }
 };

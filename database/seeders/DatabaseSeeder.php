@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +17,15 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UserSeeder::class);
         $this->call(AdminSeeder::class);
+
+        /*
+            run the following command to execute all seeders:
+            php artisan db:seed
+
+            Optionally, you can refresh your database and run
+            the seeders in one go by running:
+
+            php artisan migrate:refresh --seed
+        */
     }
 }

@@ -26,15 +26,6 @@ return new class extends Migration
             $table->timestamp('edited_at')->nullable();
             $table->timestamps();
         });
-
-        Schema::create('trade_comments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('trade_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->longText('comment_content');
-            $table->foreignId('parent_id')->nullable()->constrained('trade_comments')->onDelete('cascade');
-            $table->timestamps();
-        });
     }
 
     /**
@@ -43,6 +34,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('trades');
-        Schema::dropIfExists('trade_comments');
     }
 };
