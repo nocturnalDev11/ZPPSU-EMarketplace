@@ -15,12 +15,6 @@ class RedirectAdminIfAuthenticated
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $admin = auth('admin')->user() ?? null;
-
-        if ($admin) {
-            return redirect()->route('admin.dashboard');
-        }
-
         return $next($request);
     }
 }

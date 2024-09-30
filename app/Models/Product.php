@@ -24,11 +24,6 @@ class Product extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function comments()
-    {
-        return $this->hasMany(ProdComment::class);
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);

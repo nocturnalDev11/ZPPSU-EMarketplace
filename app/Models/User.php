@@ -3,10 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -59,18 +59,6 @@ class User extends Authenticatable
         ];
     }
 
-    public function hasRole($role)
-    {
-        $roles = explode(',', $this->roles);
-        return in_array($role, $roles);
-    }
-
-    public function setRoles(array $roles)
-    {
-        $this->roles = implode(',', $roles);
-        $this->save();
-    }
-
     public function products()
     {
         return $this->hasMany(Product::class);
@@ -104,25 +92,5 @@ class User extends Authenticatable
     public function messages()
     {
         return $this->sentMessages()->union($this->receivedMessages());
-    }
-
-    public function postComments()
-    {
-        return $this->hasMany(PostComment::class);
-    }
-
-    public function productComments()
-    {
-        return $this->hasMany(ProdComment::class);
-    }
-
-    public function serviceComments()
-    {
-        return $this->hasMany(ServiceComment::class);
-    }
-
-    public function tradeComments()
-    {
-        return $this->hasMany(TradeComment::class);
     }
 }

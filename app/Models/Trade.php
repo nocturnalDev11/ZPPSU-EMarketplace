@@ -26,12 +26,6 @@ class Trade extends Model
         return $this->hasMany(Trade::class);
     }
 
-    public function comments()
-    {
-        return $this->hasMany(TradeComment::class);
-    }
-
-
     public function user()
     {
         return $this->belongsTo(User::class);

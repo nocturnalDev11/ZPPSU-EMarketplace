@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Lists\Services;
 
-use Livewire\Component;
 use App\Models\Service;
+use Livewire\Component;
 
 class ServiceList extends Component
 {

@@ -22,7 +22,7 @@ class SearchContact extends Component
             ->whereHas('receivedMessages', function ($query) {
                 $query->where('sender_id', Auth::id());
             })
-            ->where(function($query) {
+            ->where(function ($query) {
                 $query->where('first_name', 'like', '%' . $this->search . '%')
                     ->orWhere('last_name', 'like', '%' . $this->search . '%');
             })
