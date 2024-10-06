@@ -63,14 +63,13 @@ class UserController extends Controller
     public function sendCredentials(Request $request)
     {
         $request->validate(['email' => 'required|email']);
-
         $user = User::where('email', $request->email)->first();
 
         if ($user) {
             Mail::to($user->email)->send(new UserCredentialsMail($user));
-            return redirect()->route('welcome')->with('success', 'Email sent successfully!');
+            return redirect()->route('login')->with('success', 'Credentials sent successfully to your email!');
         }
 
-        return redirect()->route('welcome')->with('error', 'User not found!');
+        return redirect()->route('welcome')->with('error', 'No account found with the provided email or you are not part of the ZPPSU community.');
     }
 }
